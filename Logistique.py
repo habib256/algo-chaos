@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 
-nmax = 4000
+nmax = 40
 r = 3.4
 u0 = 0.7
 
