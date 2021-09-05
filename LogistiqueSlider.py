@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 from matplotlib.widgets import Slider
 
 # Définition de la suite logistique
-nmax = 80
+nmax = 200
 r = 2.4
 u0 = 0.7
 
@@ -57,7 +57,7 @@ def update(val):
     ax.set_title(title)
     line, = ax.plot([u(k,r_slider.val,u0_slider.val) for k in range(nmax)], 'bo')
 
-# Connecte les evenements des Sliders à la fonction update()
+# Connecte les évènements des Sliders à la fonction update()
 r_slider.on_changed(update)
 u0_slider.on_changed(update)
 
