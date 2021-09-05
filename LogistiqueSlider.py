@@ -1,7 +1,9 @@
 """
 =====
+Algo & Chaos 1
 LogistiqueSlider.py
 =====
+2021 GPL3 VERHILLE Arnaud (gist974@gmail.com) 
 
 Représentation avec Sliders de 
 la suite logistique u = r*u(1-u)
@@ -12,8 +14,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.widgets import Slider
 
-# Définition de la suite logistique
-nmax = 200
+# Définition de la suite logistique u = r*u(1-u)
+nmax = 80
 r = 2.4
 u0 = 0.7
 
@@ -55,7 +57,7 @@ def update(val):
     ax.margins(x=0)
     title ="Suite logistique "+"$u_{n+1} =r.u_n (1-u_n)$"
     ax.set_title(title)
-    line, = ax.plot([u(k,r_slider.val,u0_slider.val) for k in range(nmax)], 'bo')
+    ax.plot([u(k,r_slider.val,u0_slider.val) for k in range(nmax)], 'bo')
 
 # Connecte les évènements des Sliders à la fonction update()
 r_slider.on_changed(update)
