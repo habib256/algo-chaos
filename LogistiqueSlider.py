@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 from matplotlib.widgets import Slider
 
 # Définition de la suite logistique u = r*u(1-u)
-nmax = 80
+nmax = 4000
 r = 2.4
 u0 = 0.7
 
@@ -49,7 +49,7 @@ u0_slider = Slider(
 
 # Lorsqu'un Slider est modifié
 # Trace une nouvelle courbe
-def update(val):
+def update(i):
     ax.clear()
     ax.set_xlabel('n')
     ax.set_ylabel("$u_n$")
@@ -63,5 +63,6 @@ def update(val):
 r_slider.on_changed(update)
 u0_slider.on_changed(update)
 
+# Dessine une première fois la courbe et affiche la !
 update(0)
 plt.show()

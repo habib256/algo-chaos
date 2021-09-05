@@ -1,10 +1,10 @@
 import matplotlib.pyplot as plt
 
-nmax = 60
-r = 2.7
+nmax = 40
+r = 3.4
 u0 = 0.7
 
-def u(n):
+def u(n,r,u0):
     u=u0
     for i in range(n):
         u=r*u*(1-u)
@@ -15,6 +15,6 @@ plt.title(title)
 plt.xlabel("n")
 plt.ylabel("$u_n$")
 
-plt.plot([u(k) for k in range(nmax)],'bo')
+plt.plot([u(k,r,u0) for k in range(nmax)],'bo')
 
 plt.show()
