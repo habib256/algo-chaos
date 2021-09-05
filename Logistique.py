@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 
-nmax = 28
-r = 2.5
+nmax = 4000
+r = 3.4
 u0 = 0.7
 
 def u(n):
@@ -10,11 +10,11 @@ def u(n):
         u=r*u*(1-u)
     return u
 
-title ="Suite logistique "+"$X_{n+1} ="+str(r)+"X_n (1-X_n)$"+" avec "+"$U_0 ="+str(u0)+"$"
+title ="Suite logistique "+"$u_{n+1} ="+str(r)+"u_n (1-u_n)$"+" avec "+"$u_0 ="+str(u0)+"$"
 plt.title(title)
 plt.xlabel("n")
-plt.ylabel("$X_n$")
+plt.ylabel("$u_n$")
 
-plt.plot([u(k) for k in range(nmax)],'b')
+plt.plot([u(k) for k in range(nmax)],'bo')
 
 plt.show()

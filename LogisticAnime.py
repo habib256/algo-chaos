@@ -3,8 +3,8 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
 nmax = 30
-r = 3.0
-dr = 0.001
+r = 2.0
+dr = 0.005
 u0 = 0.7
 
 xmin = 0
