@@ -1,3 +1,15 @@
+"""
+=====
+Algo & Chaos 1
+LogistiqueBasic.py
+=====
+2021 GPL3 VERHILLE Arnaud (gist974@gmail.com) 
+
+Représentation avec Sliders de 
+la suite logistique u = r*u(1-u)
+
+"""
+
 import matplotlib.pyplot as plt
 
 nmax = 60

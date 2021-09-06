@@ -1,18 +1,19 @@
 """
 =====
 Algo & Chaos 1
-LogistiqueSlider.py
+LogistiqueVideo.py
 =====
 2021 GPL3 VERHILLE Arnaud (gist974@gmail.com) 
 
-Représentation avec Sliders de 
-la suite logistique u = r*u(1-u)
+Représentation avec Sliders et enregistrement video 
+de la suite logistique u = r*u(1-u)
 
 """
 
 import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib.widgets import Slider
+from matplotlib.widgets import Slider, Button
+import time
 
 # Définition de la suite logistique u = r*u(1-u)
 nmax = 400
@@ -58,11 +59,31 @@ def update(i):
     ax.set_title(title)
     ax.plot([u(k,r_slider.val,u0_slider.val) for k in range(nmax)], 'bo')
 
+# Lorsqu'un Slider est modifié, update() est lancé et Recalcule la suite
 # Connecte les évènements des Sliders à la fonction update()
-# Lorsqu'un Slider est modifié update Recalcule la suite
 r_slider.on_changed(update)
 u0_slider.on_changed(update)
 
-# Dessine une première fois la courbe et affiche la courbe pltplot!
+# Fabriquons des `matplotlib.widgets.Button` 
+playax = plt.axes([0.1, 0.025, 0.1, 0.04])
+resetax = plt.axes([0.8, 0.025, 0.1, 0.04])
+
+buttonPlay = Button(playax, 'Play', color=axcolor, hovercolor='0.975')
+buttonReset = Button(resetax, 'Reset', color=axcolor, hovercolor='0.975')
+
+def reset(event):
+    r_slider.reset()
+    u0_slider.reset()
+    
+def play(event):
+    global r
+    while r_slider.val < 4 :
+        r_slider.set_val(r_slider.val+0.1)
+        time.sleep(0.1)
+
+buttonPlay.on_clicked(play)
+buttonReset.on_clicked(reset)
+
+# Dessine une première fois la courbe et affiche la fenetre pltplot!
 update(0)
 plt.show()
