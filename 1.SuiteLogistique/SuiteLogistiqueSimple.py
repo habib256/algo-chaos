@@ -33,5 +33,5 @@ plt.ylabel("$u_n$")
 # C'est ici qu'on calcule les valeurs de la suite
 plt.plot([u(k) for k in range(nmax)],'bo')
 
-# On affiche la 
+# On affiche la fenêtre pltplot
 plt.show()
