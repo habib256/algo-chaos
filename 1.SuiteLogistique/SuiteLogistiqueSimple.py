@@ -24,7 +24,7 @@ def u(n):
         u=r*u*(1-u)
     return u
 
-# Il est possible de s'inspirer des Formules LaTeX sous matplotlib pour générer de balles formules
+# Il est possible de s'inspirer des Formules LaTeX sous matplotlib pour générer de belles formules
 title ="Suite logistique "+"$u_{n+1} ="+str(r)+"u_n (1-u_n)$"+" avec "+"$u_0 ="+str(u0)+"$"
 plt.title(title)
 plt.xlabel("n")
