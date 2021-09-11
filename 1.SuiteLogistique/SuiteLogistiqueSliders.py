@@ -4,6 +4,7 @@ Algo & Chaos 1
 LogistiqueSlider.py
 =====
 2021 GPL3 VERHILLE Arnaud (gist974@gmail.com) 
+pour l'IREM de la Réunion (https://irem.univ-reunion.fr)
 
 Représentation avec Sliders de 
 la suite logistique u = r*u(1-u)
