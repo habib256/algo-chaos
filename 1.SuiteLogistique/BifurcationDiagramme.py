@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 
 
 nmin = 30   # Valeur minimale de n pour parfois obtenir une convergence
-nmax = 2000  # Valeur maximale de n
+nmax = 200  # Valeur maximale de n
 r = 0       # Le taux de croissance
 u0 = 0.6    # La population initiale en % n'a quasiment pas d'influence
 
@@ -35,8 +35,8 @@ plt.ylabel("Valeurs de "+"$u_n$")
 # C'est ici qu'on calcule les valeurs ddu diagramme de bifurcation
 x = []
 y = []
-for i in range (1000 , 4000) :
-    r = float(i/1000.0)
+for i in range (4000 , 16000) :
+    r = float(i/4000.0)
     for n in range (nmin ,nmax) :
         x.append(float(r))
         y.append(float(u(n,r,u0)))
