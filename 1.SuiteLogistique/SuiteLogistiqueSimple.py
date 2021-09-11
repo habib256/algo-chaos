@@ -1,7 +1,7 @@
 """
 =====
 Algo & Chaos 1
-LogistiqueBasic.py
+SuiteLogistiqueSimple.py
 =====
 2021 GPL3 VERHILLE Arnaud (gist974@gmail.com) 
 pour l'IREM de la Réunion (https://irem.univ-reunion.fr)
@@ -13,8 +13,8 @@ la suite logistique u = r*u(1-u)
 
 import matplotlib.pyplot as plt
 
-nmax = 60   # C'est l'année calculée maximale
-r = 2.7     # C'est le taux de croissance
+nmax = 2000   # C'est l'année calculée maximale
+r = 3.8     # C'est le taux de croissance
 u0 = 0.7    # C'est la population initiale en %
 
 # C'est la suite Un définie récursivement
