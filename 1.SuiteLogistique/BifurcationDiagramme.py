@@ -10,14 +10,16 @@ Représentation du diagramme de bifurcation de
 la suite logistique u = r*u(1-u)
 
 """
-import numpy as np
+
 import matplotlib.pyplot as plt
 
 
-nmin = 30   # Valeur minimale de n pour parfois obtenir une convergence
-nmax = 200  # Valeur maximale de n
-r = 0       # Le taux de croissance
-u0 = 0.6    # La population initiale en % n'a quasiment pas d'influence
+nmin = 40     # Valeur minimale de n 
+nmax = 200    # Valeur maximale de n
+r = 1.0       # Le taux de croissance de départ
+rmax = 4.0    # Le taux de croissance maximal
+dr = 0.001   # La variation de r soit la capacité à zoomer dans le diagramme
+u0 = 0.6      # La population initiale en %
 
 # C'est la suite Un définie récursivement
 def u(n,r,u0):
@@ -32,14 +34,14 @@ plt.title(title)
 plt.xlabel("r")
 plt.ylabel("Valeurs de "+"$u_n$")
 
-# C'est ici qu'on calcule les valeurs ddu diagramme de bifurcation
+# C'est ici qu'on calcule les valeurs du diagramme de bifurcation
 x = []
 y = []
-for i in range (4000 , 16000) :
-    r = float(i/4000.0)
+while r < rmax :
     for n in range (nmin ,nmax) :
         x.append(float(r))
         y.append(float(u(n,r,u0)))
+    r=r+dr
 
 plt.scatter(x,y,1)
 
