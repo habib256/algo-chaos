@@ -13,8 +13,8 @@ la suite logistique u = r*u(1-u)
 
 import matplotlib.pyplot as plt
 
-nmax = 2000   # C'est l'année calculée maximale
-r = 3.8     # C'est le taux de croissance
+nmax = 60   # C'est l'année calculée maximale
+r = 3.84     # C'est le taux de croissance
 u0 = 0.7    # C'est la population initiale en %
 
 # C'est la suite Un définie récursivement
@@ -31,7 +31,16 @@ plt.xlabel("n")
 plt.ylabel("$u_n$")
 
 # C'est ici qu'on calcule les valeurs de la suite
-plt.plot([u(k) for k in range(nmax)],'bo')
+x = []
+y = []
+for n in range (0 ,nmax) :
+    x.append(float(n))
+    y.append(float(u(n)))
+
+plt.plot(x,y,'bo')
+
+# Methode plus rapide et compacte
+# plt.plot([u(k) for k in range(nmax)],'bo') 
 
 # On affiche la fenêtre pltplot
 plt.show()
