@@ -1,2 +1,3 @@
 # algo-chaos
-Playing with Python, Chaos and numpy
+
+Playing with Python, Chaos, matplotlib and numpy
