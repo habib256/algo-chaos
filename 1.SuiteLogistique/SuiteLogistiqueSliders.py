@@ -30,6 +30,7 @@ def u(n,r,u0):
 fig, ax = plt.subplots()
 axcolor = 'lightgoldenrodyellow'
 plt.subplots_adjust(left=0.25, bottom=0.25)
+
 axr = plt.axes([0.25, 0.1, 0.65, 0.03], facecolor=axcolor)
 r_slider = Slider(
     ax=axr,
