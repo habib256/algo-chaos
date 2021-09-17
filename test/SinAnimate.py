@@ -7,7 +7,7 @@ w = 2*np.pi
 dt = 0.01  
 
 t = 0
-for i in range(50):
+for i in range(5000000):
     y = np.cos(k*x - w*t)
     if i == 0:
         line, = plt.plot(x, y)
