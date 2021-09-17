@@ -18,30 +18,30 @@ from mpl_toolkits.mplot3d import Axes3D
 
 
 def lorenz(x, y, z, s=10, r=28, b=2.667):
-    x_point = s*(y - x)
-    y_point = r*x - y - x*z
-    z_point = x*y - b*z
-    return x_point, y_point, z_point
+    x_dot = s*(y - x)
+    y_dot = r*x - y - x*z
+    z_dot = x*y - b*z
+    return x_dot, y_dot, z_dot
 
 
 dt = 0.01
 NbPasMax = 10000
 
-# valeurs initiales + 1
+# Need one more for the initial values
 xs = np.empty((NbPasMax + 1,))
 ys = np.empty((NbPasMax + 1,))
 zs = np.empty((NbPasMax + 1,))
 
-# Affecter les valeurs initiales
+# Setting initial values
 xs[0], ys[0], zs[0] = (0., 1., 3.)
 
-# On avance dans le temps 
+# Stepping through "time".
 for i in range(NbPasMax):
-    # On dérive l'état X, Y, Z grâce à EULER
-    x_point, y_point, z_point = lorenz(xs[i], ys[i], zs[i])
-    xs[i + 1] = xs[i] + (x_point * dt)
-    ys[i + 1] = ys[i] + (y_point * dt)
-    zs[i + 1] = zs[i] + (z_point * dt)
+    # Derivatives of the X, Y, Z state
+    x_dot, y_dot, z_dot = lorenz(xs[i], ys[i], zs[i])
+    xs[i + 1] = xs[i] + (x_dot * dt)
+    ys[i + 1] = ys[i] + (y_dot * dt)
+    zs[i + 1] = zs[i] + (z_dot * dt)
 
 fig = plt.figure()
 ax = fig.gca(projection='3d')

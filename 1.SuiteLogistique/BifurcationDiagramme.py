@@ -21,7 +21,7 @@ rmax = 4.0    # Le taux de croissance maximal
 dr = 0.001   # La variation de r soit la capacité à zoomer dans le diagramme
 u0 = 0.6      # La population initiale en %
 
-# C'est la suite Un définie récursivement
+# C'est la suite Un définie itérativement
 def u(n,r,u0):
     u=u0
     for i in range(n):
