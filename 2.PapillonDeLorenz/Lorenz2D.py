@@ -12,12 +12,12 @@ https://raw.githubusercontent.com/habib256/algo-chaos/main/2.PapillonDeLorenz/%5
 
 """
 
-
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
 
+# Générateur de data pour les valeurs en fonction de t
 def data_gen(t=0):
     cnt = 0
     while cnt < 1000:
@@ -28,7 +28,6 @@ def data_gen(t=0):
 
 def init():
     ax.set_ylim(-1.1, 1.1)
-    ax.set_xlim(0, 10)
     del xdata[:]
     del ydata[:]
     line.set_data(xdata, ydata)
@@ -37,11 +36,12 @@ def init():
 fig, ax = plt.subplots()
 line, = ax.plot([], [], lw=2)
 ax.grid()
-xdata, ydata = [], []
+xdata = []
+ydata = []
 
 
 def run(data):
-    # update the data
+    # mise à jour des datas provenant du générateur
     t, y = data
     xdata.append(t)
     ydata.append(y)
@@ -54,5 +54,6 @@ def run(data):
 
     return line,
 
+# Fonction d'animation
 ani = animation.FuncAnimation(fig, run, data_gen, blit=False, interval=10,repeat=False, init_func=init)
 plt.show()

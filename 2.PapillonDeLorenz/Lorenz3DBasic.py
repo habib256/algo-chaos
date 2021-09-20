@@ -23,11 +23,10 @@ def lorenz(x, y, z, s=10, r=28, b=2.667):
     z_point = x*y - b*z
     return x_point, y_point, z_point
 
-
 dt = 0.01
 NbPasMax = 10000
 
-# valeurs initiales + 1
+# Valeur maximale + 1 car il y a les valeurs initiales
 xs = np.empty((NbPasMax + 1,))
 ys = np.empty((NbPasMax + 1,))
 zs = np.empty((NbPasMax + 1,))
@@ -50,7 +49,7 @@ ax = fig.gca(projection='3d')
 ax.set_xlabel("Axes des X")
 ax.set_ylabel("Axes des Y")
 ax.set_zlabel("Axes des Z")
-ax.set_title("Attracteur étrange de Lorenz")
+ax.set_title("Attracteurs étranges du Papillon de Lorenz")
 
 ax.plot(xs, ys, zs, lw=0.5)
 
