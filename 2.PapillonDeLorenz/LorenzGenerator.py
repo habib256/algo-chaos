@@ -12,12 +12,13 @@ https://raw.githubusercontent.com/habib256/algo-chaos/main/2.PapillonDeLorenz/do
 
 """
 
-# --------------------
-# CONSTANTES INITIALES
+# ----------
+# CONSTANTES 
 
 X0 = 0.
 Y0 = 1.
 Z0 = 3.
+DT = 0.01
 
 # ---------
 # FONCTIONS
@@ -29,15 +30,14 @@ def lorenz(x, y, z, s=10, r=28, b=2.667):
     z_point = x*y - b*z
     return x_point, y_point, z_point
 
-def lorenz_gen(x0, y0, z0):
+def lorenz_gen(x0, y0, z0, dt):
     """Un générateur Python des états successifs de Lorenz"""
     x=x0
     y=y0
     z=z0
-    dt = 0.01
     while (True) :
-        # C'est un générateur Python donc 
-        # il stoppe après yield et reprends au prochain appel via next
+        # C'est un générateur Python donc il stoppe après yield 
+        # et il ne reprendra qu'au prochain appel via next
         yield x,y,z
         # On applique les équations de Lorenz
         x_point, y_point, z_point = lorenz(x,y,z)
@@ -49,7 +49,7 @@ def lorenz_gen(x0, y0, z0):
 # -------------------
 # PROGRAMME PRINCIPAL
 
-position = iter(lorenz_gen(X0,Y0,Z0))
+position = iter(lorenz_gen(X0,Y0,Z0,DT))
 
 for i in range(0,5) :
     print(next(position))

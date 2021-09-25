@@ -64,7 +64,6 @@ for i in range(0,NbPasMax) :
     zs.append(z)
 
 fig = plt.figure()
-#ax = fig.gca(projection='3d')
 ax = plt.axes(projection='3d')
 
 ax.set_xlabel("Axes des X")
