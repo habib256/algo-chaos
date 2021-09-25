@@ -1,7 +1,7 @@
 """
 =====
 Algo & Chaos 2
-LorenzGenerator.py
+Lorenz3D.py
 =====
 2021 GPL3 VERHILLE Arnaud (gist974@gmail.com) 
 pour l'IREM de la Réunion (https://irem.univ-reunion.fr)
@@ -12,8 +12,10 @@ https://raw.githubusercontent.com/habib256/algo-chaos/main/2.PapillonDeLorenz/do
 
 """
 
-# --------------------
-# CONSTANTES INITIALES
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+
+NbPasMax = 10000
 
 X0 = 0.
 Y0 = 1.
@@ -49,8 +51,27 @@ def lorenz_gen(x0, y0, z0):
 # -------------------
 # PROGRAMME PRINCIPAL
 
+xs=[]
+ys=[]
+zs=[]
+
 position = iter(lorenz_gen(X0,Y0,Z0))
 
-for i in range(0,5) :
-    print(next(position))
+for i in range(0,NbPasMax) :
+    x,y,z = next(position)
+    xs.append(x)
+    ys.append(y)
+    zs.append(z)
 
+fig = plt.figure()
+#ax = fig.gca(projection='3d')
+ax = plt.axes(projection='3d')
+
+ax.set_xlabel("Axes des X")
+ax.set_ylabel("Axes des Y")
+ax.set_zlabel("Axes des Z")
+ax.set_title("Attracteurs étranges du Papillon de Lorenz")
+
+ax.plot(xs, ys, zs, lw=0.5)
+
+plt.show()
