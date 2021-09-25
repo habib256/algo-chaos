@@ -8,7 +8,7 @@ pour l'IREM de la Réunion (https://irem.univ-reunion.fr)
 
 Implémentation basique du modèle de Lorenz basée sur la publication 
 d'Edward Lorenz de 1963 : "Deterministic Nonperiodic Flow".
-https://raw.githubusercontent.com/habib256/algo-chaos/main/2.PapillonDeLorenz/%5BEdward%20N%20Lorenz%20-%20Journal%20of%20the%20Atmospheric%20Sciences%5D%20Deterministic%20Nonperiodic%20Flow.pdf
+https://raw.githubusercontent.com/habib256/algo-chaos/main/2.PapillonDeLorenz/docs/%5BEdward%20N%20Lorenz%20-%20Journal%20of%20the%20Atmospheric%20Sciences%5D%20Deterministic%20Nonperiodic%20Flow.pdf
 
 """
 
