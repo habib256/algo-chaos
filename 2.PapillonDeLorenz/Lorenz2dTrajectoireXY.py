@@ -1,7 +1,7 @@
 """
 =====
 Algo & Chaos 2
-LorenzGenerator.py
+Lorenz2dAnim.py
 =====
 2021 GPL3 VERHILLE Arnaud (gist974@gmail.com) 
 pour l'IREM de la Réunion (https://irem.univ-reunion.fr)
@@ -12,19 +12,17 @@ https://raw.githubusercontent.com/habib256/algo-chaos/main/2.PapillonDeLorenz/do
 
 """
 
-import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib.animation import FuncAnimation
+import matplotlib.animation as animation
 
 # ----------
 # CONSTANTES 
 
 X0 = 0.
+EPSILONX = 0.01
 Y0 = 1.
 Z0 = 3.
-
 DT = 0.01
-NbPasMax = 10000
 
 # ---------
 # FONCTIONS
@@ -55,32 +53,47 @@ def lorenz_gen(x0, y0, z0, dt):
 # -------------------
 # PROGRAMME PRINCIPAL
 
-    t = 0.0
-    ts=[]
-    xs=[]
-    ys=[]
-    zs=[]
+x1s=[]
+y1s=[]
+z1s=[]
+x2s=[]
+y2s=[]
+z2s=[]
+
+Objet1position = iter(lorenz_gen(X0,Y0,Z0,DT))
+Objet2position = iter(lorenz_gen(X0+EPSILONX,Y0,Z0,DT))
 
 fig, ax = plt.subplots()
-line = plt.plot([0.0],[X0],'r+',[], [],'bo-')
 
-position = iter(lorenz_gen(X0,Y0,Z0,DT))
+ax = plt.axis([-25,30,-30,30])
 
-def init():
-    line[1].set_data([], [])
-    return (line)
+x1s.append(X0)
+y1s.append(Y0)
+x2s.append(X0+EPSILONX)
+y2s.append(Y0)
 
-def update(frame):
-    x,y,z = next(position)
-    ts.append(t)
-    t = t + DT
-    xs.append(x)
-    ys.append(y)
-    zs.append(z)
-    line.set_data(xs,ys)
-    print(next(position))
-    return ln, 
+trajectoireRouge, = plt.plot(x1s, y1s, 'ro')
+trajectoireBleu, = plt.plot(x2s, y2s, 'bo')
+pointRouge, = plt.plot(X0, Y0, 'ko')
+pointBleu, = plt.plot(X0+EPSILONX, Y0, 'kd')
 
-anim = FuncAnimation(fig, update, frames=100000,interval=30,
-                    init_func=init, blit=True)
-anim
+def animate(frame):
+    x1,y1,z1 = next(Objet1position)
+    x2,y2,z2 = next(Objet2position)
+    x1s.append(x1)
+    y1s.append(y1)
+    x2s.append(x2)
+    y2s.append(y2)
+
+    trajectoireRouge.set_data(x1s,y1s)
+    trajectoireBleu.set_data(x2s,y2s)
+    pointRouge.set_data(x1,y1)
+    pointBleu.set_data(x2,y2)
+   
+    return trajectoireRouge, trajectoireBleu, pointRouge, pointBleu, 
+
+# create animation using the animate() function
+myAnimation = animation.FuncAnimation(fig, animate, frames=5, \
+                                      interval=15, blit=True, repeat=True)
+
+plt.show()

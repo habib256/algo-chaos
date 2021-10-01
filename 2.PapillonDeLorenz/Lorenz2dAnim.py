@@ -19,10 +19,11 @@ import matplotlib.animation as animation
 # CONSTANTES 
 
 X0 = 0.
+EPSILONX = 0.0001
 Y0 = 1.
 Z0 = 3.
 DT = 0.01
-NbPasMax = 1000
+NbPasMax = 10000
 
 # ---------
 # FONCTIONS
@@ -53,25 +54,50 @@ def lorenz_gen(x0, y0, z0, dt):
 # -------------------
 # PROGRAMME PRINCIPAL
 
-position = iter(lorenz_gen(X0,Y0,Z0,DT))
+x1s=[]
+y1s=[]
+z1s=[]
+x2s=[]
+y2s=[]
+z2s=[]
+
+Objet1position = iter(lorenz_gen(X0,Y0,Z0,DT))
+Objet2position = iter(lorenz_gen(X0+EPSILONX,Y0,Z0,DT))
 
 fig, ax = plt.subplots()
 
-ax = plt.axis([0,NbPasMax*DT,-30,60])
+ax = plt.axis([-20,20,-30,60])
 
-redDot, = plt.plot([0], [X0], 'ro')
-blueDot, = plt.plot([0], [Y0], 'bo')
-greenDot, = plt.plot([0], [Z0], 'go')
+x1s.append(X0)
+y1s.append(Y0)
+z1s.append(Z0)
+x2s.append(X0+EPSILONX)
+y2s.append(Y0)
+z2s.append(Z0)
+
+redDot, = plt.plot(x1s, y1s, 'ro')
+blueDot, = plt.plot(x1s, z1s, 'bo')
+greenDot, = plt.plot(y1s, z1s, 'go')
 
 def animate(t):
-    x,y,z = next(position)
-    redDot.set_data(t, x)
-    blueDot.set_data(t, y)
-    greenDot.set_data(t, z)
-    return redDot, blueDot, greenDot,
+    x1,y1,z1 = next(Objet1position)
+    x2,y2,z2 = next(Objet2position)
+    x1s.append(x1)
+    y1s.append(y1)
+    z1s.append(z1)
+    x2s.append(x2)
+    y2s.append(y2)
+    z2s.append(z2)
+
+    redDot.set_data(x1s,y1s)
+    blueDot.set_data(x2s,y2s)
+
+    #greenDot.set_data(y1s,z1s)
+   
+    return redDot, blueDot, greenDot, 
 
 # create animation using the animate() function
 myAnimation = animation.FuncAnimation(fig, animate, frames=np.arange(0.0, NbPasMax*DT, DT), \
-                                      interval=30, blit=True, repeat=True)
+                                      interval=1, blit=True, repeat=True)
 
 plt.show()
