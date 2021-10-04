@@ -6,19 +6,19 @@ La suite logistique et son diagramme de bifurcation. Découvrons la suite logist
 
 Objectifs Mathématiques :
 
-Découvrir la suite logistique Un+1 = r Un(1-Un)
+- Découvrir la suite logistique Un+1 = r Un(1-Un)
 
-Tracer un graphique pour étudier la convergence d'une suite.
+- Tracer un graphique pour étudier la convergence d'une suite.
 
-Tracer le diagramme de bifurcation de cette suite .
+- Tracer le diagramme de bifurcation de cette suite .
 
 
 
 Objectifs Informatiques :
 
-S'initier à l'utilisation de la bibliothèque matplotlib de Python
+- S'initier à l'utilisation de la bibliothèque matplotlib de Python
 
-Tracer des courbes avec plplot
+- Tracer des courbes avec plplot
 
-Tracer des nuages de points avec scatter
+- Tracer des nuages de points avec scatter
 
