@@ -1,6 +1,8 @@
 # Algo & Chaos 1
 
 La suite logistique et son diagramme de bifurcation
+
+![Bifurcation3.png](/docs/Bifurcation3.png?raw=true "Bifurcation3.png")
 Découvrons la suite logistique Un+1 = r Un(1-Un) avec Python et matplotlib pour trouver le chaos qui s'y niche.
 
 Objectifs Mathématiques :
