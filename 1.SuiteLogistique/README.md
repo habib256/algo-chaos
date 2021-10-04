@@ -13,6 +13,7 @@ Tracer un graphique pour étudier la convergence d'une suite.
 Tracer le diagramme de bifurcation de cette suite .
 
 
+
 Objectifs Informatiques :
 
 S'initier à l'utilisation de la bibliothèque matplotlib de Python
