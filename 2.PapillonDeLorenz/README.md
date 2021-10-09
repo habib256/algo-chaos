@@ -13,7 +13,7 @@ Objectifs Mathématiques
 - Visualiser les équations de Lorenz dans l’espace des états (phases) en 3D.
 
 Objectifs Informatiques
-- Utiliser un générateur Python et son mot clé yieldRetour ligne automatique
-- Consolider ses compétences sous matplotlib :Retour ligne automatique
-- Tracer des courbes en 3D et contrôler la caméra.Retour ligne automatique
+- Utiliser un générateur Python et son mot clé yield
+- Consolider ses compétences sous matplotlib
+- Tracer des courbes en 3D et contrôler la caméra
 - Animer une fenêtre plplot.
