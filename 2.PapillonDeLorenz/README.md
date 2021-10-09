@@ -8,11 +8,11 @@ Le travail de modélisation de Lorenz sur la convection des masses atmosphériqu
 
 ![Bifurcation3.png](./docs/Bifurcation3.png?raw=true "Bifurcation3.png")
 
-Objectifs Mathématiques :Retour ligne automatique
+Objectifs Mathématiques
 - Résoudre numériquement le système d’équations différentielles de Lorenz.Retour ligne automatique
 - Visualiser les équations de Lorenz dans l’espace des états (phases) en 3D.
 
-Objectifs Informatiques :Retour ligne automatique
+Objectifs Informatiques
 - Utiliser un générateur Python et son mot clé yieldRetour ligne automatique
 - Consolider ses compétences sous matplotlib :Retour ligne automatique
 - Tracer des courbes en 3D et contrôler la caméra.Retour ligne automatique
