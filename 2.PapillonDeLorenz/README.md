@@ -6,7 +6,7 @@ Le travail de modélisation de Lorenz sur la convection des masses atmosphériqu
 
 [Article complet sur le site de l'IREM de la Réunion](https://irem.univ-reunion.fr/spip.php?article1126&var_mode=calcul)
 
-![Lorenz2DXY.gif]("./docs/Lorenz2DXY.gif")
+![Lorenz2DXY.gif](https://github.com/habib256/algo-chaos/raw/main/2.PapillonDeLorenz/docs/Lorenz2DXY.gif)
 
 Objectifs Mathématiques
 - Résoudre numériquement le système d’équations différentielles de Lorenz.Retour ligne automatique
