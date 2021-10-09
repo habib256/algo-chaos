@@ -66,16 +66,20 @@ Objet2position = iter(lorenz_gen(X0+EPSILONX,Y0,Z0,DT))
 fig, ax = plt.subplots()
 
 ax = plt.axis([-25,30,-30,30])
+ax = plt.title("Trajectoires de Lorenz XY: Papillon en 2D")
+ax = plt.xlabel("X")
+ax = plt.ylabel("Y")
+
 
 x1s.append(X0)
 y1s.append(Y0)
 x2s.append(X0+EPSILONX)
 y2s.append(Y0)
 
-trajectoireRouge, = plt.plot(x1s, y1s, 'ro')
-trajectoireBleu, = plt.plot(x2s, y2s, 'bo')
-pointRouge, = plt.plot(X0, Y0, 'ko')
-pointBleu, = plt.plot(X0+EPSILONX, Y0, 'kd')
+trajectoireRouge, = plt.plot(x1s, y1s, 'r-')
+trajectoireBleu, = plt.plot(x2s, y2s, 'b-')
+pointRouge, = plt.plot(X0, Y0, 'ro')
+pointBleu, = plt.plot(X0+EPSILONX, Y0, 'bo')
 
 def animate(frame):
     x1,y1,z1 = next(Objet1position)
@@ -92,8 +96,9 @@ def animate(frame):
    
     return trajectoireRouge, trajectoireBleu, pointRouge, pointBleu, 
 
-# create animation using the animate() function
-myAnimation = animation.FuncAnimation(fig, animate, frames=5, \
-                                      interval=15, blit=True, repeat=True)
+# créer une animation en utilisant la fonction animate()
+myAnimation = animation.FuncAnimation(fig, animate, frames=1000, \
+                                      interval=30, blit=True, repeat=True)
+myAnimation.save('Lorenz2DXY.gif', writer='imagemagick')
 
 plt.show()
