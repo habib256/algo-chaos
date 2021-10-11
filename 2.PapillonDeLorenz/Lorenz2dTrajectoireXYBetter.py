@@ -14,6 +14,7 @@ https://raw.githubusercontent.com/habib256/algo-chaos/main/2.PapillonDeLorenz/do
 
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
+matplotlib.use('Qt4Agg'))
 
 # ----------
 # CONSTANTES 
@@ -63,13 +64,14 @@ z2s=[]
 Objet1position = iter(lorenz_gen(X0,Y0,Z0,DT))
 Objet2position = iter(lorenz_gen(X0+EPSILONX,Y0,Z0,DT))
 
-fig, ax = plt.subplots()
+px = 1/plt.rcParams['figure.dpi']  # pixel in inches
+
+fig, ax = plt.subplots(figsize=(580*px, 380*px))
 
 ax = plt.axis([-25,30,-30,30])
 ax = plt.title("Trajectoires de Lorenz XY: Papillon en 2D")
 ax = plt.xlabel("X")
 ax = plt.ylabel("Y")
-
 
 x1s.append(X0)
 y1s.append(Y0)
@@ -97,8 +99,9 @@ def animate(frame):
     return trajectoireRouge, trajectoireBleu, pointRouge, pointBleu, 
 
 # créer une animation en utilisant la fonction animate()
-myAnimation = animation.FuncAnimation(fig, animate, frames=1300, \
+myAnimation = animation.FuncAnimation(fig, animate, frames=1000, \
                                       interval=30, blit=True, repeat=True)
-myAnimation.save('Lorenz2DXY.gif', writer='imagemagick')
+#myAnimation.save('Lorenz2DXY.gif', writer='imagemagick')
+#gifsicle -b -O2 --colors 16 Lorenz2DXY.gif
 
 plt.show()
