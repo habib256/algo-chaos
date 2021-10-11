@@ -19,10 +19,10 @@ import matplotlib.animation as animation
 # CONSTANTES 
 
 X0 = 0.
-EPSILONX = 0.01
+EPSILON = 0.01
 Y0 = 1.
 Z0 = 3.
-DT = 0.01
+DT = 0.005
 
 # ---------
 # FONCTIONS
@@ -58,7 +58,7 @@ trajectoire2 = [[],[],[]]
 trajectoires = [trajectoire1,trajectoire2]
 
 Objet1position = iter(lorenz_gen(X0,Y0,Z0,DT))
-Objet2position = iter(lorenz_gen(X0+EPSILONX,Y0,Z0,DT))
+Objet2position = iter(lorenz_gen(X0+EPSILON,Y0,Z0,DT))
 
 fig, ax = plt.subplots()
 
@@ -70,7 +70,7 @@ ax = plt.ylabel("Y")
 trajectoireRouge, = plt.plot(trajectoires[0][0],trajectoires[0][1], 'r-')
 trajectoireBleu, = plt.plot(trajectoires[1][0],trajectoires[1][1], 'b-')
 pointRouge, = plt.plot(X0, Y0, 'ro')
-pointBleu, = plt.plot(X0+EPSILONX, Y0, 'bo')
+pointBleu, = plt.plot(X0+EPSILON, Y0, 'bo')
 
 def animate(i):
     x1,y1,z1 = next(Objet1position)
