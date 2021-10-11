@@ -14,7 +14,6 @@ https://raw.githubusercontent.com/habib256/algo-chaos/main/2.PapillonDeLorenz/do
 
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
-matplotlib.use('Qt4Agg'))
 
 # ----------
 # CONSTANTES 
@@ -54,53 +53,44 @@ def lorenz_gen(x0, y0, z0, dt):
 # -------------------
 # PROGRAMME PRINCIPAL
 
-x1s=[]
-y1s=[]
-z1s=[]
-x2s=[]
-y2s=[]
-z2s=[]
+trajectoire1 = [[X0],[Y0],[Z0]]
+trajectoire2 = [[X0+EPSILONX],[Y0],[Z0]]
 
 Objet1position = iter(lorenz_gen(X0,Y0,Z0,DT))
 Objet2position = iter(lorenz_gen(X0+EPSILONX,Y0,Z0,DT))
 
-px = 1/plt.rcParams['figure.dpi']  # pixel in inches
-
-fig, ax = plt.subplots(figsize=(580*px, 380*px))
+fig, ax = plt.subplots()
 
 ax = plt.axis([-25,30,-30,30])
 ax = plt.title("Trajectoires de Lorenz XY: Papillon en 2D")
 ax = plt.xlabel("X")
 ax = plt.ylabel("Y")
 
-x1s.append(X0)
-y1s.append(Y0)
-x2s.append(X0+EPSILONX)
-y2s.append(Y0)
-
-trajectoireRouge, = plt.plot(x1s, y1s, 'r-')
-trajectoireBleu, = plt.plot(x2s, y2s, 'b-')
+trajectoireRouge, = plt.plot(trajectoire1[0],trajectoire1[1], 'r-')
+trajectoireBleu, = plt.plot(trajectoire2[0],trajectoire2[1], 'b-')
 pointRouge, = plt.plot(X0, Y0, 'ro')
 pointBleu, = plt.plot(X0+EPSILONX, Y0, 'bo')
 
-def animate(frame):
+def animate(i):
     x1,y1,z1 = next(Objet1position)
     x2,y2,z2 = next(Objet2position)
-    x1s.append(x1)
-    y1s.append(y1)
-    x2s.append(x2)
-    y2s.append(y2)
+    trajectoire1[0].append(x1)
+    trajectoire1[1].append(y1)
+    trajectoire1[2].append(z1)
+    trajectoire2[0].append(x2)
+    trajectoire2[1].append(y2)
+    trajectoire2[2].append(z2)
 
-    trajectoireRouge.set_data(x1s,y1s)
-    trajectoireBleu.set_data(x2s,y2s)
+    trajectoireRouge.set_data(trajectoire1[0],trajectoire1[1])
+    trajectoireBleu.set_data(trajectoire2[0],trajectoire2[1])
     pointRouge.set_data(x1,y1)
     pointBleu.set_data(x2,y2)
    
     return trajectoireRouge, trajectoireBleu, pointRouge, pointBleu, 
 
 # créer une animation en utilisant la fonction animate()
-myAnimation = animation.FuncAnimation(fig, animate, frames=1000, \
-                                      interval=30, blit=True, repeat=True)
+myAnimation = animation.FuncAnimation(fig, animate, frames=1300, \
+                                      interval=15, blit=True, repeat=True)
 #myAnimation.save('Lorenz2DXY.gif', writer='imagemagick')
 #gifsicle -b -O2 --colors 16 Lorenz2DXY.gif
 
