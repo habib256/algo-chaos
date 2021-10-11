@@ -53,8 +53,9 @@ def lorenz_gen(x0, y0, z0, dt):
 # -------------------
 # PROGRAMME PRINCIPAL
 
-trajectoire1 = [[X0],[Y0],[Z0]]
-trajectoire2 = [[X0+EPSILONX],[Y0],[Z0]]
+trajectoire1 = [[],[],[]]
+trajectoire2 = [[],[],[]]
+trajectoires = [trajectoire1,trajectoire2]
 
 Objet1position = iter(lorenz_gen(X0,Y0,Z0,DT))
 Objet2position = iter(lorenz_gen(X0+EPSILONX,Y0,Z0,DT))
@@ -66,23 +67,23 @@ ax = plt.title("Trajectoires de Lorenz XY: Papillon en 2D")
 ax = plt.xlabel("X")
 ax = plt.ylabel("Y")
 
-trajectoireRouge, = plt.plot(trajectoire1[0],trajectoire1[1], 'r-')
-trajectoireBleu, = plt.plot(trajectoire2[0],trajectoire2[1], 'b-')
+trajectoireRouge, = plt.plot(trajectoires[0][0],trajectoires[0][1], 'r-')
+trajectoireBleu, = plt.plot(trajectoires[1][0],trajectoires[1][1], 'b-')
 pointRouge, = plt.plot(X0, Y0, 'ro')
 pointBleu, = plt.plot(X0+EPSILONX, Y0, 'bo')
 
 def animate(i):
     x1,y1,z1 = next(Objet1position)
     x2,y2,z2 = next(Objet2position)
-    trajectoire1[0].append(x1)
-    trajectoire1[1].append(y1)
-    trajectoire1[2].append(z1)
-    trajectoire2[0].append(x2)
-    trajectoire2[1].append(y2)
-    trajectoire2[2].append(z2)
+    trajectoires[0][0].append(x1)
+    trajectoires[0][1].append(y1)
+    trajectoires[0][2].append(z1)
+    trajectoires[1][0].append(x2)
+    trajectoires[1][1].append(y2)
+    trajectoires[1][2].append(z2)
 
-    trajectoireRouge.set_data(trajectoire1[0],trajectoire1[1])
-    trajectoireBleu.set_data(trajectoire2[0],trajectoire2[1])
+    trajectoireRouge.set_data(trajectoires[0][0],trajectoires[0][1])
+    trajectoireBleu.set_data(trajectoires[1][0],trajectoires[1][1])
     pointRouge.set_data(x1,y1)
     pointBleu.set_data(x2,y2)
    
