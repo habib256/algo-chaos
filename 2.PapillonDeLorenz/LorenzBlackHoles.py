@@ -68,16 +68,13 @@ def func(num, dataSet, line):
     # NOTE: there is no .set_data() for 3 dim data...
     line.set_data(dataSet[0:2, :num])    
     line.set_3d_properties(dataSet[2, :num])
-    #ax.view_init(30, num)
+    ax.view_init(15, num/2)
     return line
  
 # THE DATA POINTS 
 for i in range(0,NbPasMax) :
     xs[i],ys[i],zs[i] = next(position)
 
-#z = np.arange(0,20,0.2) # This would be the z-axis ('z' means time here)
-#x = np.cos(t)-1
-#y = 1/2*(np.cos(2*t)-1)
 dataSet = np.array([xs, ys, zs])
 numDataPoints = len(xs)
  
@@ -89,11 +86,8 @@ ax = plt.axes(projection='3d')
 line = plt.plot(dataSet[0], dataSet[1], dataSet[2], lw=0.5, c='r')[0] # For line plot
  
 # AXES PROPERTIES]
-# ax.set_xlim3d([limit0, limit1])
-ax.set_xlabel('X(t)')
-ax.set_ylabel('Y(t)')
-ax.set_zlabel('Z(t)')
-ax.set_title('Trajectoires de Lorenz XYZ: Papillon en 3D')
+ax.set_axis_off()
+ax.set_title('Lorenz "Black Holes"')
  
 # Creating the Animation object
 line_ani = animation.FuncAnimation(fig, func, frames=numDataPoints, fargs=(dataSet,line), interval=50, blit=False)

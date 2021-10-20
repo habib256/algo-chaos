@@ -75,9 +75,6 @@ def func(num, dataSet, line):
 for i in range(0,NbPasMax) :
     xs[i],ys[i],zs[i] = next(position)
 
-#z = np.arange(0,20,0.2) # This would be the z-axis ('z' means time here)
-#x = np.cos(t)-1
-#y = 1/2*(np.cos(2*t)-1)
 dataSet = np.array([xs, ys, zs])
 numDataPoints = len(xs)
  
@@ -89,7 +86,6 @@ ax = plt.axes(projection='3d')
 line = plt.plot(dataSet[0], dataSet[1], dataSet[2], lw=0.5, c='r')[0] # For line plot
  
 # AXES PROPERTIES]
-# ax.set_xlim3d([limit0, limit1])
 ax.set_xlabel('X(t)')
 ax.set_ylabel('Y(t)')
 ax.set_zlabel('Z(t)')
