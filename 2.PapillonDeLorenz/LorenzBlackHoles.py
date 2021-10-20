@@ -25,7 +25,7 @@ EPSILONX = 0.01
 Y0 = 1.
 Z0 = 3.
 DT = 0.01
-NbPasMax = 10000
+NBPASMAX = 10000
 
 # ---------
 # FONCTIONS
@@ -57,9 +57,9 @@ def lorenz_gen(x0, y0, z0, dt):
 # -------------------
 # PROGRAMME PRINCIPAL
 
-xs=np.zeros((NbPasMax))
-ys=np.zeros((NbPasMax))
-zs=np.zeros((NbPasMax))
+xs=np.zeros((NBPASMAX))
+ys=np.zeros((NBPASMAX))
+zs=np.zeros((NBPASMAX))
 
 position = iter(lorenz_gen(X0,Y0,Z0,DT))
 
@@ -72,11 +72,10 @@ def func(num, dataSet, line):
     return line
  
 # THE DATA POINTS 
-for i in range(0,NbPasMax) :
+for i in range(0,NBPASMAX) :
     xs[i],ys[i],zs[i] = next(position)
 
 dataSet = np.array([xs, ys, zs])
-numDataPoints = len(xs)
  
 # GET SOME MATPLOTLIB OBJECTS
 fig = plt.figure()
@@ -90,7 +89,7 @@ ax.set_axis_off()
 ax.set_title('Lorenz "Black Holes"')
  
 # Creating the Animation object
-line_ani = animation.FuncAnimation(fig, func, frames=numDataPoints, fargs=(dataSet,line), interval=50, blit=False)
+line_ani = animation.FuncAnimation(fig, func, frames=NBPASMAX, fargs=(dataSet,line), interval=50, blit=False)
 #line_ani.save(r'AnimationNew.mp4')
 
 plt.show()
