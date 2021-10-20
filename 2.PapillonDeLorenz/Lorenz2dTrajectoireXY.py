@@ -1,7 +1,7 @@
 """
 =====
 Algo & Chaos 2
-Lorenz2dAnim.py
+Lorenz2dTrajectoireXY.py
 =====
 2021 GPL3 VERHILLE Arnaud (gist974@gmail.com) 
 pour l'IREM de la Réunion (https://irem.univ-reunion.fr)

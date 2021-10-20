@@ -1,7 +1,7 @@
 """
 =====
 Algo & Chaos 2
-Lorenz2dAnim.py
+Lorenz3dTrajectoireXYZ.py
 =====
 2021 GPL3 VERHILLE Arnaud (gist974@gmail.com) 
 pour l'IREM de la Réunion (https://irem.univ-reunion.fr)
@@ -57,9 +57,9 @@ def lorenz_gen(x0, y0, z0, dt):
 # -------------------
 # PROGRAMME PRINCIPAL
 
-xs=np.empty((NbPasMax))
-ys=np.empty((NbPasMax))
-zs=np.empty((NbPasMax))
+xs=np.zeros((NbPasMax))
+ys=np.zeros((NbPasMax))
+zs=np.zeros((NbPasMax))
 
 position = iter(lorenz_gen(X0,Y0,Z0,DT))
 
