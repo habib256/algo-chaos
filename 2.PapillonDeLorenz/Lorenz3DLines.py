@@ -1,7 +1,7 @@
 """
 =====
 Algo & Chaos 2
-LorenzBlackHoles.py
+Lorenz3DLines.py
 =====
 2021 GPL3 VERHILLE Arnaud (gist974@gmail.com) 
 pour l'IREM de la Réunion (https://irem.univ-reunion.fr)
@@ -20,13 +20,10 @@ from mpl_toolkits.mplot3d import Axes3D
 # ----------
 # CONSTANTES 
 
-X0 = 0.
 EPSILON = 0.01
-Y0 = 1.
-Z0 = 3.
-DT = 0.01
-NBPASMAX = 10000
-OBJETMAX = 64
+DT = 0.005
+NBPASMAX = 1000
+OBJETMAX = 200
 
 # ---------
 # FONCTIONS
@@ -61,32 +58,42 @@ def lorenz_gen(x0, y0, z0, dt):
 pos=np.zeros((OBJETMAX,3,NBPASMAX))
 
 # GENERER LES DATAS (POINTS DE LA TRAJECTOIRE DE LORENZ)
-pos_gen = iter(lorenz_gen(X0,Y0,Z0,DT))
-for i in range(0,NBPASMAX) :
-    pos[0][0][i],pos[0][1][i],pos[0][2][i] = next(pos_gen)
+objectNb = 0
+for i in range(-20,20,6):
+    for j in range(-20,20,6):
+        for k in range(0,20,5):
+            pos_gen = iter(lorenz_gen(i,j,k,DT))
+            for l in range(0,NBPASMAX) :
+                pos[objectNb][0][l],pos[objectNb][1][l],pos[objectNb][2][l] = next(pos_gen)
+            objectNb = objectNb + 1
+
+print(objectNb)
 
 # ANIMATION FUNCTION
 def func(num, dataSet, line):
     # NOTE: there is no .set_data() for 3 dim data...
-    line.set_data(pos[0][0:2, :num])    
-    line.set_3d_properties(pos[0][2, :num])
-    #ax.scatter(pos[0][num], pos [1][num], pos[2][num])
+    #line.set_data(pos[0][0:2, :num])    
+    #line.set_3d_properties(pos[0][2, :num])
+    ax.clear()
+    ax.set_axis_off()
+    for i in range (0, OBJETMAX) :
+        ax.scatter(pos[i][0][:num], pos[i][1][:num], pos[i][2][:num],alpha=1, s=0.25)   
     ax.view_init(15, num/2)
     return line
   
 # GET SOME MATPLOTLIB OBJECTS
-fig = plt.figure()
+fig = plt.figure(dpi=200)
 ax = plt.axes(projection='3d')
 
 # AXES PROPERTIES]
 ax.set_axis_off()
-ax.set_title('Lorenz 3D Lines"')
+ax.set_title('Lorenz 3D Line')
  
 # NOTE: Can't pass empty arrays into 3d version of plot()
 line = plt.plot(pos[0][0], pos[0][1], pos[0][2], lw=0.5, c='r')[0] # For line plot
  
 # Creating the Animation object
-line_ani = animation.FuncAnimation(fig, func, frames=NBPASMAX, fargs=(pos,line), interval=50, blit=False)
-#line_ani.save(r'AnimationNew.mp4')
+monanim = animation.FuncAnimation(fig, func, frames=NBPASMAX, fargs=(pos,line), interval=30, blit=False)
+#monanim.save(r'AnimationNew.mp4')
 
 plt.show()

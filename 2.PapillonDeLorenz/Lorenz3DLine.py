@@ -1,7 +1,7 @@
 """
 =====
 Algo & Chaos 2
-LorenzBlackHoles.py
+Lorenz3DLine.py
 =====
 2021 GPL3 VERHILLE Arnaud (gist974@gmail.com) 
 pour l'IREM de la Réunion (https://irem.univ-reunion.fr)
@@ -26,7 +26,6 @@ Y0 = 1.
 Z0 = 3.
 DT = 0.01
 NBPASMAX = 10000
-OBJETMAX = 64
 
 # ---------
 # FONCTIONS
@@ -58,18 +57,18 @@ def lorenz_gen(x0, y0, z0, dt):
 # -------------------
 # PROGRAMME PRINCIPAL
 
-pos=np.zeros((OBJETMAX,3,NBPASMAX))
+pos=np.zeros((3,NBPASMAX))
 
 # GENERER LES DATAS (POINTS DE LA TRAJECTOIRE DE LORENZ)
 pos_gen = iter(lorenz_gen(X0,Y0,Z0,DT))
 for i in range(0,NBPASMAX) :
-    pos[0][0][i],pos[0][1][i],pos[0][2][i] = next(pos_gen)
+    pos[0][i],pos[1][i],pos[2][i] = next(pos_gen)
 
 # ANIMATION FUNCTION
 def func(num, dataSet, line):
     # NOTE: there is no .set_data() for 3 dim data...
-    line.set_data(pos[0][0:2, :num])    
-    line.set_3d_properties(pos[0][2, :num])
+    line.set_data(pos[0:2, :num])    
+    line.set_3d_properties(pos[2, :num])
     #ax.scatter(pos[0][num], pos [1][num], pos[2][num])
     ax.view_init(15, num/2)
     return line
@@ -80,10 +79,10 @@ ax = plt.axes(projection='3d')
 
 # AXES PROPERTIES]
 ax.set_axis_off()
-ax.set_title('Lorenz 3D Lines"')
+ax.set_title('Lorenz 3D Line')
  
 # NOTE: Can't pass empty arrays into 3d version of plot()
-line = plt.plot(pos[0][0], pos[0][1], pos[0][2], lw=0.5, c='r')[0] # For line plot
+line = plt.plot(pos[0], pos[1], pos[2], lw=0.5, c='r')[0] # For line plot
  
 # Creating the Animation object
 line_ani = animation.FuncAnimation(fig, func, frames=NBPASMAX, fargs=(pos,line), interval=50, blit=False)
