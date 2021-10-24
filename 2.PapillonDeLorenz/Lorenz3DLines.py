@@ -21,9 +21,9 @@ from mpl_toolkits.mplot3d import Axes3D
 # CONSTANTES 
 
 EPSILON = 0.01
-DT = 0.005
+DT = 0.001
 NBPASMAX = 1000
-OBJETMAX = 200
+OBJETMAX = 48
 
 # ---------
 # FONCTIONS
@@ -59,9 +59,9 @@ pos=np.zeros((OBJETMAX,3,NBPASMAX))
 
 # GENERER LES DATAS (POINTS DE LA TRAJECTOIRE DE LORENZ)
 objectNb = 0
-for i in range(-20,20,6):
-    for j in range(-20,20,6):
-        for k in range(0,20,5):
+for i in range(-20,20,11):
+    for j in range(-20,20,11):
+        for k in range(0,20,8):
             pos_gen = iter(lorenz_gen(i,j,k,DT))
             for l in range(0,NBPASMAX) :
                 pos[objectNb][0][l],pos[objectNb][1][l],pos[objectNb][2][l] = next(pos_gen)
@@ -69,20 +69,17 @@ for i in range(-20,20,6):
 
 print(objectNb)
 
-# ANIMATION FUNCTION
+# FONNCTION D'ANIMATION
 def func(num, dataSet, line):
-    # NOTE: there is no .set_data() for 3 dim data...
-    #line.set_data(pos[0][0:2, :num])    
-    #line.set_3d_properties(pos[0][2, :num])
     ax.clear()
     ax.set_axis_off()
     for i in range (0, OBJETMAX) :
-        ax.scatter(pos[i][0][:num], pos[i][1][:num], pos[i][2][:num],alpha=1, s=0.25)   
+        ax.scatter(pos[i][0][:num], pos[i][1][:num], pos[i][2][:num],alpha=0.25, s=0.05)   
     ax.view_init(15, num/2)
     return line
   
 # GET SOME MATPLOTLIB OBJECTS
-fig = plt.figure(dpi=200)
+fig = plt.figure(dpi=300)
 ax = plt.axes(projection='3d')
 
 # AXES PROPERTIES]
@@ -94,6 +91,6 @@ line = plt.plot(pos[0][0], pos[0][1], pos[0][2], lw=0.5, c='r')[0] # For line pl
  
 # Creating the Animation object
 monanim = animation.FuncAnimation(fig, func, frames=NBPASMAX, fargs=(pos,line), interval=30, blit=False)
-#monanim.save(r'AnimationNew.mp4')
+monanim.save(r'AnimationNew.mp4')
 
 plt.show()
