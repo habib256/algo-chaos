@@ -21,7 +21,7 @@ from mpl_toolkits.mplot3d import Axes3D
 # CONSTANTES 
 
 X0 = 0.
-EPSILONX = 0.01
+EPSILON = 0.01
 Y0 = 1.
 Z0 = 3.
 DT = 0.01
@@ -57,39 +57,35 @@ def lorenz_gen(x0, y0, z0, dt):
 # -------------------
 # PROGRAMME PRINCIPAL
 
-xs=np.zeros((NBPASMAX))
-ys=np.zeros((NBPASMAX))
-zs=np.zeros((NBPASMAX))
+pos=np.zeros((3,NBPASMAX))
 
-position = iter(lorenz_gen(X0,Y0,Z0,DT))
+# GENERER LES DATAS (POINTS DE LA TRAJECTOIRE DE LORENZ)
+pos_gen = iter(lorenz_gen(X0,Y0,Z0,DT))
+for i in range(0,NBPASMAX) :
+    pos[0][i],pos[1][i],pos[2][i] = next(pos_gen)
 
 # ANIMATION FUNCTION
 def func(num, dataSet, line):
     # NOTE: there is no .set_data() for 3 dim data...
-    line.set_data(dataSet[0:2, :num])    
-    line.set_3d_properties(dataSet[2, :num])
+    line.set_data(pos[0:2, :num])    
+    line.set_3d_properties(pos[2, :num])
+    #ax.scatter(pos[0][num], pos [1][num], pos[2][num])
     ax.view_init(15, num/2)
     return line
- 
-# THE DATA POINTS 
-for i in range(0,NBPASMAX) :
-    xs[i],ys[i],zs[i] = next(position)
-
-dataSet = np.array([xs, ys, zs])
- 
+  
 # GET SOME MATPLOTLIB OBJECTS
 fig = plt.figure()
 ax = plt.axes(projection='3d')
- 
-# NOTE: Can't pass empty arrays into 3d version of plot()
-line = plt.plot(dataSet[0], dataSet[1], dataSet[2], lw=0.5, c='r')[0] # For line plot
- 
+
 # AXES PROPERTIES]
 ax.set_axis_off()
 ax.set_title('Lorenz "Black Holes"')
  
+# NOTE: Can't pass empty arrays into 3d version of plot()
+line = plt.plot(pos[0], pos[1], pos[2], lw=0.5, c='r')[0] # For line plot
+ 
 # Creating the Animation object
-line_ani = animation.FuncAnimation(fig, func, frames=NBPASMAX, fargs=(dataSet,line), interval=50, blit=False)
+line_ani = animation.FuncAnimation(fig, func, frames=NBPASMAX, fargs=(pos,line), interval=50, blit=False)
 #line_ani.save(r'AnimationNew.mp4')
 
 plt.show()
