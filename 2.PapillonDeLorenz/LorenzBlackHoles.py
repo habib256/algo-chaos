@@ -21,7 +21,7 @@ from mpl_toolkits.mplot3d import Axes3D
 # CONSTANTES 
 
 DT = 0.0008
-NBPASMAX = 1000
+NBPASMAX = 5000
 OBJETMAX = 15000
 
 # ---------
@@ -85,9 +85,9 @@ def func(num, dataSet, line):
         ys.append(pos[i][1][num])
         zs.append(pos[i][2][num])
 
-    ax.scatter(xs, ys, zs,alpha=0.5, s=1)
+    ax.scatter(xs, ys, zs,alpha=0.5, s=0.5)
 
-    #ax.view_init(15, (num-100)/4)
+    ax.view_init(15, num)
     return line
   
 # GET SOME MATPLOTLIB OBJECTS
