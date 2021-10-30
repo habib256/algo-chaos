@@ -6,7 +6,11 @@ Le travail de modélisation de Lorenz sur la convection des masses atmosphériqu
 
 [Article complet sur le site de l&#39;IREM de la Réunion](https://irem.univ-reunion.fr/spip.php?article1126&var_mode=calcul)
 
+Visualisation de l'importance de l'influence de conditions initiales proches en 2D
 ![Lorenz2DXY.gif](https://github.com/habib256/algo-chaos/raw/main/2.PapillonDeLorenz/docs/Lorenz2DXY.gif)
+
+Etude des trajectoires de points répartis selon 2 plans en 2D
+![LorenzSpider.gif](https://github.com/habib256/algo-chaos/raw/main/2.PapillonDeLorenz/docs/LorenzSpider.gif)
 
 Objectifs Mathématiques
 
