@@ -20,9 +20,9 @@ from mpl_toolkits.mplot3d import Axes3D
 # ----------
 # CONSTANTES 
 
-DT = 0.001
-NBPASMAX = 300
-OBJETMAX = 2500
+DT = 0.0015
+NBPASMAX = 200
+OBJETMAX = 2000
 
 # ---------
 # FONCTIONS
@@ -56,9 +56,9 @@ def lorenz_gen(x0, y0, z0, dt):
 
 pos=np.zeros((OBJETMAX,3,NBPASMAX))
 
-# GENERER LES DATAS (POINTS DE LA TRAJECTOIRE DE LORENZ)
+# GENERER LES DATAS (POINTS POUR LES TRAJECTOIRES DE LORENZ)
 objectNb = 0
-for i in range(-50,50,4):
+for i in range(-50,50,5):
     for j in range(-50,50,2):
         for k in range(0,80,40):
             pos_gen = iter(lorenz_gen(i,j,k,DT))
@@ -102,6 +102,6 @@ ax.set_title('Lorenz 3D "Black Holes"')
 monanim = animation.FuncAnimation(fig, update, frames=NBPASMAX, interval=30, blit=False)
 #monanim.save(r'AnimationNew.mp4')
 #monanim.save('AnimationNew.gif', writer='imagemagick')
-#gifsicle -b -O2 --colors 16 AnimationNew.gif
+#gifsicle -b -O3 --colors 4 AnimationNew.gif
 
 plt.show()
