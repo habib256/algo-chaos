@@ -10,7 +10,7 @@ Visualisation de l'importance de l'influence de conditions initiales proches en 
 ![Lorenz2DXY.gif](https://github.com/habib256/algo-chaos/raw/main/2.PapillonDeLorenz/docs/Lorenz2DXY.gif)
 
 Etude des trajectoires de points répartis selon 2 plans en 2D
-![LorenzSpider.gif](https://github.com/habib256/algo-chaos/raw/main/2.PapillonDeLorenz/docs/LorenzSpider.gif)
+![LorenzSpiderAnim.gif](https://github.com/habib256/algo-chaos/raw/main/2.PapillonDeLorenz/docs/LorenzSpiderAnim.gif)
 
 Objectifs Mathématiques
 
