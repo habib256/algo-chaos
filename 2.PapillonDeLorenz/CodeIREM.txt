@@ -127,6 +127,8 @@ ax.plot(xs, ys, zs, lw=0.5)
 plt.show()
 </code>
 
+[Le code complet ci-dessus est téléchargeable sur github en cliquant ici.->https://github.com/habib256/algo-chaos/blob/main/2.PapillonDeLorenz/Lorenz3dBasic.py]
+
 La forme de papillon de cette courbe 3D est caractéristique, c'est le fameux papillon de Lorenz. On remarque que les courbes s'enveloppent sans jamais se croiser tout en "orbitant" autour des deux attracteurs dit "étranges" car leur structure est fractale.
 
 <img17164|center>
@@ -137,18 +139,17 @@ Si vous visualisez cet article en vous accompagnant d'une fenêtre Jupiter, je v
 
 Dans l'excellent livre de James Gleick : la théorie du chaos, l'auteur précise :
 
-<img17184|left>«Un jour d'hivers 1961, désirant examiner une de ses séquences sur une plus longue période, Lorenz prit un raccourci. Au lieu de reprendre au début l’exécution de son programme, il commença à mi-chemin.»  
+<img17184|left>«Un jour d'hivers 1961, désirant examiner une de ses séquences sur une plus longue période, Lorenz prit un raccourci. Au lieu de reprendre au début l’exécution de son programme, il commença à mi-chemin.» [[ {La Théorie du Chaos} de James GLEICK p34 - Éditeur Flammarion - ISBN : 978-2-0802-4498-7]]
 
 Lorenz prît ses nouvelles conditions initiales à partir des nombres du listage précédent et il observa que la suite générée divergeait très rapidement par rapport aux précédentes.
 
-«Sa première réaction fut qu'un tube à vide de son ordinateur avait encore flanché. Soudain, il comprit la vérité. Tout avait bien fonctionné. Le problème se trouvait dans les nombres qu'il avait tapés. L'ordinateur gardait en mémoire des nombres à six chiffres,(par exemple) 0,506127, dont trois décimales seulement: 506 apparaissaient à l'impression, pour économiser de la place.»
+«Sa première réaction fut qu'un tube à vide de son ordinateur avait encore flanché. Soudain, il comprit la vérité. Tout avait bien fonctionné. Le problème se trouvait dans les nombres qu'il avait tapés. L'ordinateur gardait en mémoire des nombres à six chiffres,(par exemple) 0,506127, dont trois décimales seulement: 506 apparaissaient à l'impression, pour économiser de la place.»  [[ {La Théorie du Chaos} de James GLEICK p35 - Éditeur Flammarion - ISBN : 978-2-0802-4498-7]]
 
 Il avait tapé sur le clavier de son ordinateur des conditions initiales tronquées au millième. C'est-à-dire des conditions initiales très légèrement différentes du listage précédent. Ce n'était pas évident pour l'époque: Il découvrait que le déterminisme peut donner des résultats imprévisibles au bout d'un temps assez court, car il est impossible d'avoir une précision infinie pour les valeurs des conditions initiales.
 
 Lorenz lui-même déclare : 
 
-«L'homme de la rue qui voit que l'on peut prédire relativement bien les marées sur quelques mois demandera pourquoi nous ne pouvons en faire autant avec l'atmosphère; ce n'est qu'un fluide différent et ses lois sont tout aussi compliquées. Mais j'ai réalisé que tout système physique ayant un comportement non périodique était {imprévisible}.»
-
+«L'homme de la rue qui voit que l'on peut prédire relativement bien les marées sur quelques mois demandera pourquoi nous ne pouvons en faire autant avec l'atmosphère; ce n'est qu'un fluide différent et ses lois sont tout aussi compliquées. Mais j'ai réalisé que tout système physique ayant un comportement non périodique était {imprévisible}.»  [[ {La Théorie du Chaos} de James GLEICK p37 - Éditeur Flammarion - ISBN : 978-2-0802-4498-7]]
 
 {{{Animer une fenêtre plplot pour visualiser l'influence des conditions initiales}}}
 
@@ -215,12 +216,18 @@ myAnimation = animation.FuncAnimation(fig, animate, frames=1300, interval=30, bl
 plt.show()
 </code>
 
+[Le code complet ci-dessus est téléchargeable sur github en cliquant ici.->https://github.com/habib256/algo-chaos/blob/main/2.PapillonDeLorenz/Lorenz2dTrajectoireXY.py]
+
 <img16967|center>
 
 On observe sur l'animation ci-dessus qu'au départ, les 2 trajectoires sont parfaitement confondues et les points rouge et bleu suivent exactement le même chemin puis, petit à petit, ils se séparent doucement tout en se poursuivant avant de sombrer dans le chaos en suivant des trajectoires complètement différentes : C'est une visualisation de l'influence des conditions initiales sur la prédictibilité des systèmes dynamiques.
 
+{{{Enregistrer des animations de haute qualité en .gif ou en mp4}}}
 
-{{{Enregistrer des animations en .gif ou en mp4}}}
+Il est possible d'améliorer très nettement la qualité de l'image obtenue lors de l'animation en augmentant le nombre de points par pouce (dpi = dot per inch) lors de l'initialisation de l'objet figure de matplotlib ce qui correspond à la résolution de la "feuille de dessin" :
+<code class="python">
+fig = plt.figure(dpi=200)
+</code>
 
 L'animation .gif du chapitre précédent s'obtient très facilement en rajoutant le code suivant :
 <code class="python">
@@ -232,35 +239,51 @@ L'animation est enregistrée à vitesse de calcul maximale directement sur le di
 $ gifsicle -b -O3 --colors 4 Lorenz2DXY.gif
 </code>
 
-Il est aussi très facile de générer des fichiers vidéos en .mp4 en utilisant le code  Python suivant :
+Il est tout aussi facile de générer des fichiers vidéos en .mp4 en utilisant le code  Python suivant :
 <code class="python">
 myAnimation.save(r'MonAnimation.mp4')
 </code>
 
-{{{Vers la beauté}}}
+{{{La beauté cachée du système dynamique de Lorenz}}}
 
-Avec un système aussi intéressant, il est possible de générer de très belles animations en 3D ainsi que de magnifiques projections en 2D. Je vous propose de générer une grille cubique de "particules". Elles suivent chacune une trajectoire différente du système de Lorenz. On affiche toutes les trajectoires de ces "particules" ensemble et cela donne l'animation ci-dessous en 2D :
+Avec un système aussi intéressant, il est possible de générer de très belles animations en 3D ainsi que de magnifiques projections en 2D. Je vous propose de générer une grille cubique de "particules". Elles suivent chacune une trajectoire différente du système de Lorenz. On affiche toutes les positions de ces "particules" à chaque instant dt, puis on projette en 2D. Cela donne l'animation ci-dessous :
 
 <img17145|center>
 
-On peut aussi, avec beaucoup de calculs et de temps, générer une animation vidéo pour 40 001 particules ayant des conditions initiales extrêmement proches ( dans ce cas EPSILON = 0.00005 )
-
-<div align="center"><iframe width="560" height="315" src="https://www.youtube.com/embed/LBIX8buRy4Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen> </iframe></div>
-
-{{{Conclusion}}}
-
-Les travaux de Lorenz nous font profondément réfléchir sur notre capacité à prédire l'avenir par la science. Même si les formules que nous connaissons étaient parfaitement exactes, notre incapacité fondamentale à mesurer les conditions initiales  avec une précision infinie implique qu'il nous sera à jamais impossible de prédire l'avenir car le chaos prédictif est presque partout présent dans la nature qui nous entoure : dans les rivières et les nuages, dans les vents et les courants, convectifs et turbulents.  Il est même possible de fabriquer un système physique réel (un véritable circuit électrique) pour visualiser le Papillon de Lorenz sur un oscilloscope comme le propose [cette vidéo->https://www.youtube.com/watch?v=DFKm0K5O7ak]
-
-{{{Post-scriptum vidéo}}}
-
-L'animation 2D précédente peut aussi être vue en 3D de nombreuses façons et vous pourrez en voir deux exemples enregistrés en .mp4 ci-dessous. Je vous conseille de les regarder en plein écran, directement sur youtube, et en qualité maximale pour ne pas trop perdre en qualité avec les algorithmes de compression vidéo :
-
+On peut visualiser la même chose en 3D en tournant doucement autour de notre courbe grâce au code suivant rajouté dans la fonction update(num) :
+<code class="python">
+ax.view_init(20,num)  # Rotation autour de la figure sur le plan XY
+</code>
+La qualité de la vidéo ci-dessous peut-être ruinée par les algorithmes de compression de youtube. N'hésitez pas à choisir la meilleure résolution HD sous youtube ou bien générer la vidéo par vous-même pour une qualité quasi-parfaite.
 <div align="center"><iframe width="560" height="315" src="https://www.youtube.com/embed/vn9u-54WibY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen> </iframe></div>
 
-Si on colore chaque trajectoire différemment, on obtient ceci : 
+[Le code complet ci-dessus est téléchargeable sur github en cliquant ici.->https://github.com/habib256/algo-chaos/blob/main/2.PapillonDeLorenz/LorenzBlackHoles.py]
 
+On peut aussi, avec beaucoup de calculs et de temps, générer une animation vidéo pour un très grand nombre de particules ayant des conditions initiales extrêmement proches ( dans ce cas il y a 33 334 Trajectoires sur 2000 pas de temps avec des écarts EPSILON = 0.00005 ) :
+<p></p>
+<div align="center"><iframe width="560" height="315" src="https://www.youtube.com/embed/EKlefZJMX1Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen> </iframe></div>
+<p></p>
+[Le code complet ci-dessus est téléchargeable sur github en cliquant ici.->https://github.com/habib256/algo-chaos/blob/main/2.PapillonDeLorenz/LorenzInitialConditionSensibility.py]
+En utilisant d'autres librairies de rendu et des temps de calcul beaucoup plus importants, il est possible d'obtenir de magnifiques animations comme [celle-ci ->https://www.youtube.com/watch?v=5xu-9D4ahVU] en utilisant exactement les mêmes principes.
+<p></p>
+Si on colore chaque trajectoire différemment, on obtient ceci : 
+<p></p>
 <div align="center"><iframe width="560" height="315" src="https://www.youtube.com/embed/UebSQIOyflM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen> </iframe></div>
+<p></p>
+[Le code complet ci-dessus est téléchargeable sur github en cliquant ici.->https://github.com/habib256/algo-chaos/blob/main/2.PapillonDeLorenz/Lorenz3DLines.py]
 
 On commence à observer les limites de la librairie matplotlib Axes3D car l'occultation des lignes en fonction du "zbuffer"  n'est pas prise en compte ...
 
-En utilisant d'autres librairies de rendu et des temps de calcul beaucoup plus importants, il est possible d'obtenir de magnifiques animations comme [celle-ci ->https://www.youtube.com/watch?v=5xu-9D4ahVU] en utilisant les mêmes principes.
+{{{Conclusion}}}
+
+Les travaux de Lorenz nous font profondément réfléchir sur notre capacité à prédire l'avenir par la science. Même si toutes les formules que nous connaissons étaient parfaitement exactes, notre incapacité fondamentale à mesurer les conditions initiales  avec une précision infinie implique qu'il nous sera à jamais impossible de prédire l'avenir !
+
+Ce type de chaos est presque partout présent dans la nature qui nous entoure : dans les rivières et les nuages, dans les vents et les courants, convectifs et turbulents.
+
+Il est même possible de fabriquer un système physique réel (un véritable circuit électrique) pour visualiser le Papillon de Lorenz sur un oscilloscope comme le propose [cette vidéo->https://www.youtube.com/watch?v=DFKm0K5O7ak]
+
+<img17185|center>
+
+Il y a encore de nombreuses connaissances à acquérir sur le système dynamique de Lorenz. [Jos Leys->http://www.josleys.com/], [Étienne Ghys->http://www.bourbaphy.fr/ghys.pdf] et Aurélien Alvarez ont réalisé un fantastique documentaire en neuf chapitres de treize minutes chacun sous licence libre: [CHAOS: UNE AVENTURE MATHÉMATIQUE->https://www.chaos-math.org/fr.html].
+
+Ce documentaire est accessible en français et le visionner devrait être la prochaine étape de votre voyage dans les contrées étranges du chaos mathématique et naturel.
