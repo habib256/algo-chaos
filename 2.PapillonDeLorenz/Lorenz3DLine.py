@@ -66,7 +66,7 @@ for i in range(0,NBPASMAX) :
 
 # ANIMATION FUNCTION
 def func(num, dataSet, line):
-    # NOTE: there is no .set_data() for 3 dim data...
+    # ATTENTION, il n'y a pas de .set_data() simple pour les données en 3 dimensions.
     line.set_data(pos[0:2, :num])    
     line.set_3d_properties(pos[2, :num])
     #ax.scatter(pos[0][num], pos [1][num], pos[2][num])

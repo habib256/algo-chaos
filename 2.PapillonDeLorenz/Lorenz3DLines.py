@@ -79,7 +79,7 @@ def func(num, dataSet, line):
     return line
   
 # GET SOME MATPLOTLIB OBJECTS
-fig = plt.figure(dpi=300)
+fig = plt.figure()
 ax = plt.axes(projection='3d')
 
 # AXES PROPERTIES]
