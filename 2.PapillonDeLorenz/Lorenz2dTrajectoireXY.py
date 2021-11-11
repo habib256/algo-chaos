@@ -102,5 +102,6 @@ def animate(frame):
 myAnimation = animation.FuncAnimation(fig, animate, frames=1300, \
                                       interval=30, blit=True, repeat=True)
 #myAnimation.save('Lorenz2DXY.gif', writer='imagemagick')
+#gifsicle -b -O3 --colors 4 AnimationNew.gif
 
 plt.show()

@@ -22,7 +22,7 @@ from mpl_toolkits.mplot3d import Axes3D
 
 DT = 0.01
 EPSILON = 0.00005
-NBPASMAX = 4000
+NBPASMAX = 1000
 OBJETMAX = 40001
 
 # ---------
@@ -74,7 +74,7 @@ while i < 1.0 :
                 pos[objectNb][0][l],pos[objectNb][1][l],pos[objectNb][2][l] = next(pos_gen)
             objectNb = objectNb + 1
 
-print(objectNb)
+print(str(objectNb)+ " objets présents")
 
 # FONCTION D'ANIMATION
 def update(num):
@@ -105,8 +105,9 @@ ax = plt.axes(projection='3d')
 ax.set_axis_off()
 
 # Creating the Animation object
-monanim = animation.FuncAnimation(fig, update, frames=NBPASMAX, interval=5, blit=False)
-#monanim.save(r'AnimationNew.mp4')
-monanim.save('AnimationNew.gif', writer='imagemagick')
+monanim = animation.FuncAnimation(fig, update, frames=NBPASMAX, interval=15, blit=False)
+
+print ("L'ordinateur calcule l'animation. Vous pouvez vous faire un café :-)")
+monanim.save(r'AnimationNew.mp4')
 
 plt.show()

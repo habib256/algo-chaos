@@ -67,7 +67,7 @@ for i in range(-20,20,11):
                 pos[objectNb][0][l],pos[objectNb][1][l],pos[objectNb][2][l] = next(pos_gen)
             objectNb = objectNb + 1
 
-print(objectNb)
+print(str(objectNb)+ " objets présents")
 
 # FONNCTION D'ANIMATION
 def func(num, dataSet, line):
@@ -91,6 +91,6 @@ line = plt.plot(pos[0][0], pos[0][1], pos[0][2], lw=0.5, c='r')[0] # For line pl
  
 # Creating the Animation object
 monanim = animation.FuncAnimation(fig, func, frames=NBPASMAX, fargs=(pos,line), interval=30, blit=False)
-monanim.save(r'AnimationNew.mp4')
+#monanim.save(r'AnimationNew.mp4')
 
 plt.show()

@@ -66,7 +66,7 @@ for i in range(-50,50,5):
                 pos[objectNb][0][l],pos[objectNb][1][l],pos[objectNb][2][l] = next(pos_gen)
             objectNb = objectNb + 1
 
-print(objectNb)
+print(str(objectNb)+ " objets présents")
 
 # FONCTION D'ANIMATION
 def update(num):
@@ -95,12 +95,10 @@ ax = plt.axes(projection='3d')
 
 # AXES PROPERTIES]
 ax.set_axis_off()
-ax.set_title('Lorenz 3D "Black Holes"')
 
 # Creating the Animation object
 monanim = animation.FuncAnimation(fig, update, frames=NBPASMAX, interval=30, blit=False)
 #monanim.save(r'AnimationNew.mp4')
 #monanim.save('AnimationNew.gif', writer='imagemagick')
-#gifsicle -b -O3 --colors 4 AnimationNew.gif
 
 plt.show()

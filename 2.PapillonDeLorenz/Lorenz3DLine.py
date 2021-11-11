@@ -79,7 +79,6 @@ ax = plt.axes(projection='3d')
 
 # AXES PROPERTIES]
 ax.set_axis_off()
-ax.set_title('Lorenz 3D Line')
  
 # NOTE: Can't pass empty arrays into 3d version of plot()
 line = plt.plot(pos[0], pos[1], pos[2], lw=0.5, c='r')[0] # For line plot
