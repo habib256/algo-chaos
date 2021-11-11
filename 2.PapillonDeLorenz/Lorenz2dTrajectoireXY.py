@@ -96,6 +96,8 @@ def animate(frame):
    
     return trajectoireRouge, trajectoireBleu, pointRouge, pointBleu, 
 
+
+
 # créer une animation en utilisant la fonction animate()
 myAnimation = animation.FuncAnimation(fig, animate, frames=1300, \
                                       interval=30, blit=True, repeat=True)

@@ -1,7 +1,7 @@
 """
 =====
 Algo & Chaos 2
-LorenzBlackHoles.py
+LorenzInitialConditionSensibility.py
 =====
 2021 GPL3 VERHILLE Arnaud (gist974@gmail.com) 
 pour l'IREM de la Réunion (https://irem.univ-reunion.fr)
@@ -20,9 +20,10 @@ from mpl_toolkits.mplot3d import Axes3D
 # ----------
 # CONSTANTES 
 
-DT = 0.0015
-NBPASMAX = 2000
-OBJETMAX = 2000
+DT = 0.01
+EPSILON = 0.00005
+NBPASMAX = 4000
+OBJETMAX = 40001
 
 # ---------
 # FONCTIONS
@@ -57,10 +58,17 @@ def lorenz_gen(x0, y0, z0, dt):
 pos=np.zeros((OBJETMAX,3,NBPASMAX))
 
 # GENERER LES DATAS (POINTS POUR LES TRAJECTOIRES DE LORENZ)
+print ("L'ordinateur calcule les trajectoires. Patientez svp.")
 objectNb = 0
-for i in range(-50,50,5):
-    for j in range(-50,50,2):
-        for k in range(0,80,40):
+i = -1.0
+j = 0.0
+k = 2.0
+while i < 1.0 :
+    i = i+ EPSILON
+    while j < 2.0 :
+        j = j+ EPSILON
+        while k < 4.0 :
+            k = k+ EPSILON
             pos_gen = iter(lorenz_gen(i,j,k,DT))
             for l in range(0,NBPASMAX) :
                 pos[objectNb][0][l],pos[objectNb][1][l],pos[objectNb][2][l] = next(pos_gen)
@@ -84,10 +92,10 @@ def update(num):
         ys.append(pos[i][1][num])
         zs.append(pos[i][2][num])
 
-    ax.scatter(xs, ys, zs,alpha=1, s=5)
+    ax.scatter(xs, ys, zs,alpha=0.1, s=5)
 
-    ax.view_init(20,num)  # Rotation autour de la figure sur l'axe xy
-    #ax.view_init(0,180)    #Vue fabuleuse !
+    #ax.view_init(20,num)  # Rotation autour de la figure sur l'axe xy
+    ax.view_init(0,180)    #Vue fabuleuse !
   
 # GET SOME MATPLOTLIB OBJECTS
 fig = plt.figure()
@@ -95,12 +103,10 @@ ax = plt.axes(projection='3d')
 
 # AXES PROPERTIES]
 ax.set_axis_off()
-ax.set_title('Lorenz 3D "Black Holes"')
 
 # Creating the Animation object
-monanim = animation.FuncAnimation(fig, update, frames=NBPASMAX, interval=30, blit=False)
+monanim = animation.FuncAnimation(fig, update, frames=NBPASMAX, interval=5, blit=False)
 #monanim.save(r'AnimationNew.mp4')
-#monanim.save('AnimationNew.gif', writer='imagemagick')
-#gifsicle -b -O3 --colors 4 AnimationNew.gif
+monanim.save('AnimationNew.gif', writer='imagemagick')
 
 plt.show()
