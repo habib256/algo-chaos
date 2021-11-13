@@ -21,9 +21,9 @@ from mpl_toolkits.mplot3d import Axes3D
 # CONSTANTES 
 
 DT = 0.01
-EPSILON = 0.00005
-NBPASMAX = 1000
-OBJETMAX = 40001
+EPSILON = 0.00006
+NBPASMAX = 2000
+OBJETMAX = 33334
 
 # ---------
 # FONCTIONS
@@ -58,7 +58,7 @@ def lorenz_gen(x0, y0, z0, dt):
 pos=np.zeros((OBJETMAX,3,NBPASMAX))
 
 # GENERER LES DATAS (POINTS POUR LES TRAJECTOIRES DE LORENZ)
-print ("L'ordinateur calcule les trajectoires. Patientez svp.")
+print ("L'ordinateur calcule "+str(OBJETMAX)+" trajectoires. Patientez svp...")
 objectNb = 0
 i = -1.0
 j = 0.0
@@ -74,7 +74,7 @@ while i < 1.0 :
                 pos[objectNb][0][l],pos[objectNb][1][l],pos[objectNb][2][l] = next(pos_gen)
             objectNb = objectNb + 1
 
-print(str(objectNb)+ " objets présents")
+print("Il y a bien " + str(objectNb)+ " trajectoires à calculer.")
 
 # FONCTION D'ANIMATION
 def update(num):
@@ -94,20 +94,20 @@ def update(num):
 
     ax.scatter(xs, ys, zs,alpha=0.1, s=5)
 
-    #ax.view_init(20,num)  # Rotation autour de la figure sur l'axe xy
     ax.view_init(0,180)    #Vue fabuleuse !
+
+    print ("Avancement du calcul de l'animation : [" + str(num) + " /"+ str(NBPASMAX)+"]", end="\r")
   
-# GET SOME MATPLOTLIB OBJECTS
-fig = plt.figure()
+# On récupère les objets matplotlib
+fig = plt.figure(dpi=200)
 ax = plt.axes(projection='3d')
 
-# AXES PROPERTIES]
+# On efface les axes
 ax.set_axis_off()
 
-# Creating the Animation object
-monanim = animation.FuncAnimation(fig, update, frames=NBPASMAX, interval=15, blit=False)
+# Création d'un objet Animation
+monanim = animation.FuncAnimation(fig, update, frames=NBPASMAX, interval=20, blit=False)
 
-print ("L'ordinateur calcule l'animation. Vous pouvez vous faire un café :-)")
 monanim.save(r'AnimationNew.mp4')
 
 plt.show()
