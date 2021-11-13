@@ -2,6 +2,8 @@
 =====
 Algo & Chaos 2
 LorenzInitialConditionSensibility.py
+
+A lancer à partir d'un shell pour profiter de end='\r'
 =====
 2021 GPL3 VERHILLE Arnaud (gist974@gmail.com) 
 pour l'IREM de la Réunion (https://irem.univ-reunion.fr)
@@ -20,11 +22,10 @@ from mpl_toolkits.mplot3d import Axes3D
 # ----------
 # CONSTANTES 
 
-DT = 0.01
-EPSILON = 0.00006
+DT = 0.008
+EPSILON = 0.000015
 NBPASMAX = 2000
-OBJETMAX = 33334
-
+OBJETMAX = 133334
 # ---------
 # FONCTIONS
 
@@ -57,7 +58,7 @@ def lorenz_gen(x0, y0, z0, dt):
 
 pos=np.zeros((OBJETMAX,3,NBPASMAX))
 
-# GENERER LES DATAS (POINTS POUR LES TRAJECTOIRES DE LORENZ)
+# GENERER LES DATAS (GRILLES DE POINTS POUR LES TRAJECTOIRES DE LORENZ)
 print ("L'ordinateur calcule "+str(OBJETMAX)+" trajectoires. Patientez svp...")
 objectNb = 0
 i = -1.0
@@ -73,8 +74,9 @@ while i < 1.0 :
             for l in range(0,NBPASMAX) :
                 pos[objectNb][0][l],pos[objectNb][1][l],pos[objectNb][2][l] = next(pos_gen)
             objectNb = objectNb + 1
+            print ("  ["+str(objectNb)+ " / "+str(OBJETMAX)+"]", end='\r')
 
-print("Il y a bien " + str(objectNb)+ " trajectoires à calculer.")
+print("\nIl y a exactement " + str(objectNb)+ " trajectoires à calculer.")
 
 # FONCTION D'ANIMATION
 def update(num):
@@ -92,22 +94,27 @@ def update(num):
         ys.append(pos[i][1][num])
         zs.append(pos[i][2][num])
 
-    ax.scatter(xs, ys, zs,alpha=0.1, s=5)
+    ax.scatter(xs, ys, zs,alpha=0.1, s=0.5)
 
-    ax.view_init(0,180)    #Vue fabuleuse !
+    ax.view_init(0,180)    #Vue fabuleuse pour projection 2D !
 
-    print ("Avancement du calcul de l'animation : [" + str(num) + " /"+ str(NBPASMAX)+"]", end="\r")
+    print ("  Avancement du calcul de l'animation : [" + str(num) + " /"+ str(NBPASMAX)+"] images", end="\r")
   
 # On récupère les objets matplotlib
-fig = plt.figure(dpi=200)
+fig = plt.figure(dpi=250)
 ax = plt.axes(projection='3d')
 
 # On efface les axes
 ax.set_axis_off()
+# On supprime le cadre blanc
+fig.subplots_adjust(bottom = 0)
+fig.subplots_adjust(top = 1)
+fig.subplots_adjust(right = 1)
+fig.subplots_adjust(left = 0)
 
 # Création d'un objet Animation
-monanim = animation.FuncAnimation(fig, update, frames=NBPASMAX, interval=20, blit=False)
+monanim = animation.FuncAnimation(fig, update, frames=NBPASMAX-1, interval=20, blit=False)
 
 monanim.save(r'AnimationNew.mp4')
 
-plt.show()
+#plt.show()
