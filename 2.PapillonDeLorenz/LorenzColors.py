@@ -1,7 +1,7 @@
 """
 =====
 Algo & Chaos 2
-LorenzInitialConditionSensibility.py
+LorenzColors.py
 
 A lancer à partir d'un shell pour profiter de end='\r'
 =====
@@ -25,7 +25,7 @@ from mpl_toolkits.mplot3d import Axes3D
 DT = 0.008
 EPSILON = 0.00001
 NBPASMAX = 2000
-OBJETMAX = 40000
+OBJETMAX = 200000
 # ---------
 # FONCTIONS
 
@@ -96,7 +96,7 @@ def update(num):
         zs.append(pos[i][2][num])
         colors.append(i)
         
-    cmap = plt.cm.cool
+    cmap = plt.cm.winter
     ax.scatter(xs, ys, zs,alpha=0.5, s=1, c=cmap(colors))
     ax.view_init(0,160)    #Vue fabuleuse pour projection 2D !
 
