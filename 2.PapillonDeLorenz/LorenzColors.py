@@ -78,7 +78,7 @@ def update(num):
     xs, ys, zs = pos[:objectNb, :, num].transpose()
     colors = np.arange(objectNb)
         
-    cmap = plt.cm.viridis
+    cmap = plt.cm.viridis_r
     ax.scatter(xs, ys, zs, alpha=0.5, s=2, c=cmap(colors))
     ax.view_init(0, 160)
 
