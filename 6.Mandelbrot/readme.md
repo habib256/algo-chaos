@@ -3,11 +3,13 @@
 Ce programme est un visualiseur interactif de l'ensemble de Mandelbrot. Il permet à l'utilisateur de zoomer et de dézoomer sur l'ensemble de Mandelbrot en utilisant la souris. 
 Les coordonnées de la souris dans le plan complexe et le niveau de zoom sont affichés en temps réel.
 
+![Image de l'ensemble de Mandelbrot](mandelbrot.png)
+
 ## Fonctionnalités
 
 - Affichage de l'ensemble de Mandelbrot
 - Zoom avant et arrière avec la souris
-- Affichage des coordonnées de la souris et du niveau de zoom
+- Affichage des coordonnées de la souris dans le plan complexe et du niveau de zoom
 
 ## Bibliothèques utilisées
 
