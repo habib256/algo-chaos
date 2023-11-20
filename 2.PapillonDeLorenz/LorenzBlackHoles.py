@@ -3,7 +3,7 @@
 Algo & Chaos 2
 LorenzBlackHoles.py
 =====
-2021 GPL3 VERHILLE Arnaud (gist974@gmail.com) 
+2023 GPL3 VERHILLE Arnaud (gist974@gmail.com) 
 pour l'IREM de la Réunion (https://irem.univ-reunion.fr)
 
 Implémentation basique du modèle de Lorenz basée sur la publication 
@@ -16,40 +16,25 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 from mpl_toolkits.mplot3d import Axes3D
+from scipy.integrate import solve_ivp
 
 # ----------
 # CONSTANTES 
 
 DT = 0.0015
-NBPASMAX = 2000
-OBJETMAX = 2000
+NBPASMAX = 500
+OBJETMAX = 100000
 
 # ---------
 # FONCTIONS
 
-def lorenz(x, y, z, s=10, r=28, b=2.667):
+def lorenz(t, xyz, s=10, r=28, b=2.667):
     """Calcul des dérivées de Lorenz par rapport au temps"""
+    x, y, z = xyz
     x_point = s*(y - x)
     y_point = r*x - y - x*z
     z_point = x*y - b*z
-    return x_point, y_point, z_point
-
-def lorenz_gen(x0, y0, z0, dt):
-    """Un générateur Python des états successifs de Lorenz"""
-    x=x0
-    y=y0
-    z=z0
-    while (True) :
-        # C'est un générateur Python donc il stoppe après yield 
-        # et il ne reprendra qu'au prochain appel via next
-        yield x,y,z
-        #yield np.array(x, y, z)
-        # On applique les équations de Lorenz
-        x_point, y_point, z_point = lorenz(x,y,z)
-        # Et on calcule l'état suivant pour X, Y, Z grâce à EULER
-        x = x + x_point * dt
-        y = y + y_point * dt
-        z = z + z_point * dt
+    return [x_point, y_point, z_point]
 
 # -------------------
 # PROGRAMME PRINCIPAL
@@ -58,15 +43,14 @@ pos=np.zeros((OBJETMAX,3,NBPASMAX))
 
 # GENERER LES DATAS (POINTS POUR LES TRAJECTOIRES DE LORENZ)
 objectNb = 0
-for i in range(-50,50,5):
-    for j in range(-50,50,2):
-        for k in range(0,80,40):
-            pos_gen = iter(lorenz_gen(i,j,k,DT))
-            for l in range(0,NBPASMAX) :
-                pos[objectNb][0][l],pos[objectNb][1][l],pos[objectNb][2][l] = next(pos_gen)
-            objectNb = objectNb + 1
+for i in np.arange(-50,50,5):
+    for j in np.arange(-50,50,2):
+        for k in np.arange(0,80,40):
+            sol = solve_ivp(lorenz, [0, NBPASMAX*DT], [i, j, k], t_eval=np.arange(0, NBPASMAX*DT, DT))
+            pos[objectNb,:,:] = sol.y
+            objectNb += 1
 
-print(str(objectNb)+ " objets présents")
+print(f"{objectNb} objets présents")
 
 # FONCTION D'ANIMATION
 def update(num):
@@ -76,17 +60,11 @@ def update(num):
     ax.set_ylim3d(-30, 30)
     ax.set_zlim3d(0, 50)
 
-    xs= []
-    ys= []
-    zs= []
-    for i in range (0, objectNb) :
-        xs.append(pos[i][0][num])
-        ys.append(pos[i][1][num])
-        zs.append(pos[i][2][num])
+    xs, ys, zs = pos[:objectNb,:,num].T
 
-    ax.scatter(xs, ys, zs,alpha=1, s=5)
+    ax.scatter(xs, ys, zs,alpha=1, s=3)
 
-    ax.view_init(20,num)  # Rotation autour de la figure sur l'axe xy
+    ax.view_init(0,num)  # Rotation autour de la figure sur l'axe xy
     #ax.view_init(0,180)    #Vue fabuleuse !
   
 # GET SOME MATPLOTLIB OBJECTS

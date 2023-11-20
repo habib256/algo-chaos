@@ -12,69 +12,40 @@ https://raw.githubusercontent.com/habib256/algo-chaos/main/2.PapillonDeLorenz/do
 
 """
 
+import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
-# ----------
 # CONSTANTES 
+X0, Y0, Z0, DT, EPSILONX = 0., 1., 3., 0.01, 0.01
 
-X0 = 0.
-EPSILONX = 0.01
-Y0 = 1.
-Z0 = 3.
-DT = 0.01
-
-# ---------
 # FONCTIONS
-
 def lorenz(x, y, z, s=10, r=28, b=2.667):
     """Calcul des dérivées de Lorenz par rapport au temps"""
-    x_point = s*(y - x)
-    y_point = r*x - y - x*z
-    z_point = x*y - b*z
-    return x_point, y_point, z_point
+    return s*(y - x), r*x - y - x*z, x*y - b*z
 
 def lorenz_gen(x0, y0, z0, dt):
     """Un générateur Python des états successifs de Lorenz"""
-    x=x0
-    y=y0
-    z=z0
-    while (True) :
-        # C'est un générateur Python donc il stoppe après yield 
-        # et il ne reprendra qu'au prochain appel via next
-        yield x,y,z
-        # On applique les équations de Lorenz
-        x_point, y_point, z_point = lorenz(x,y,z)
-        # Et on calcule l'état suivant pour X, Y, Z grâce à EULER
-        x = x + x_point * dt
-        y = y + y_point * dt
-        z = z + z_point * dt
+    x, y, z = x0, y0, z0
+    while True:
+        yield x, y, z
+        x_point, y_point, z_point = lorenz(x, y, z)
+        x += x_point * dt
+        y += y_point * dt
+        z += z_point * dt
 
-# -------------------
 # PROGRAMME PRINCIPAL
-
-x1s=[]
-y1s=[]
-z1s=[]
-x2s=[]
-y2s=[]
-z2s=[]
-
-Objet1position = iter(lorenz_gen(X0,Y0,Z0,DT))
-Objet2position = iter(lorenz_gen(X0+EPSILONX,Y0,Z0,DT))
+Objet1position = iter(lorenz_gen(X0, Y0, Z0, DT))
+Objet2position = iter(lorenz_gen(X0+EPSILONX, Y0, Z0, DT))
 
 fig, ax = plt.subplots()
+ax.axis([-25,30,-30,30])
+ax.set_title("Trajectoires de Lorenz XY: Papillon en 2D")
+ax.set_xlabel("X")
+ax.set_ylabel("Y")
 
-ax = plt.axis([-25,30,-30,30])
-ax = plt.title("Trajectoires de Lorenz XY: Papillon en 2D")
-ax = plt.xlabel("X")
-ax = plt.ylabel("Y")
-
-
-x1s.append(X0)
-y1s.append(Y0)
-x2s.append(X0+EPSILONX)
-y2s.append(Y0)
+x1s, y1s = [X0], [Y0]
+x2s, y2s = [X0+EPSILONX], [Y0]
 
 trajectoireRouge, = plt.plot(x1s, y1s, 'r-')
 trajectoireBleu, = plt.plot(x2s, y2s, 'b-')
@@ -82,26 +53,27 @@ pointRouge, = plt.plot(X0, Y0, 'ro')
 pointBleu, = plt.plot(X0+EPSILONX, Y0, 'bo')
 
 def animate(frame):
-    x1,y1,z1 = next(Objet1position)
-    x2,y2,z2 = next(Objet2position)
-    x1s.append(x1)
-    y1s.append(y1)
-    x2s.append(x2)
-    y2s.append(y2)
+    temp_x1s, temp_y1s, temp_x2s, temp_y2s = [], [], [], []
+    for _ in range(2):  # Adjust this value as needed
+        x1, y1, z1 = next(Objet1position)
+        x2, y2, z2 = next(Objet2position)
+        temp_x1s.append(x1)
+        temp_y1s.append(y1)
+        temp_x2s.append(x2)
+        temp_y2s.append(y2)
 
-    trajectoireRouge.set_data(x1s,y1s)
-    trajectoireBleu.set_data(x2s,y2s)
-    pointRouge.set_data(x1,y1)
-    pointBleu.set_data(x2,y2)
-   
-    return trajectoireRouge, trajectoireBleu, pointRouge, pointBleu, 
+    x1s.extend(temp_x1s)
+    y1s.extend(temp_y1s)
+    x2s.extend(temp_x2s)
+    y2s.extend(temp_y2s)
 
+    trajectoireRouge.set_data(x1s, y1s)
+    trajectoireBleu.set_data(x2s, y2s)
+    pointRouge.set_data([x1], [y1])
+    pointBleu.set_data([x2], [y2])
 
+    return trajectoireRouge, trajectoireBleu, pointRouge, pointBleu,
 
-# créer une animation en utilisant la fonction animate()
-myAnimation = animation.FuncAnimation(fig, animate, frames=1300, \
-                                      interval=30, blit=True, repeat=True)
-#myAnimation.save('Lorenz2DXY.gif', writer='imagemagick')
-#Sous BASH $ gifsicle -b -O3 --colors 4 AnimationNew.gif
+myAnimation = animation.FuncAnimation(fig, animate, frames=1300, interval=1000/30, blit=True, repeat=True)
 
 plt.show()

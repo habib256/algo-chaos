@@ -18,17 +18,16 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 from mpl_toolkits.mplot3d import Axes3D
+import numba
 
-# ----------
-# CONSTANTES 
-
+# Constantes
 DT = 0.008
 EPSILON = 0.00001
 NBPASMAX = 2000
-OBJETMAX = 200000
-# ---------
-# FONCTIONS
+OBJETMAX = 10000
 
+# Fonctions
+@numba.jit(nopython=True)
 def lorenz(x, y, z, s=10, r=28, b=2.667):
     """Calcul des dérivées de Lorenz par rapport au temps"""
     x_point = s*(y - x)
@@ -36,49 +35,39 @@ def lorenz(x, y, z, s=10, r=28, b=2.667):
     z_point = x*y - b*z
     return x_point, y_point, z_point
 
+@numba.jit(nopython=True)
 def lorenz_gen(x0, y0, z0, dt):
     """Un générateur Python des états successifs de Lorenz"""
-    x=x0
-    y=y0
-    z=z0
-    while (True) :
-        # C'est un générateur Python donc il stoppe après yield 
-        # et il ne reprendra qu'au prochain appel via next
-        yield x,y,z
-        #yield np.array(x, y, z)
-        # On applique les équations de Lorenz
-        x_point, y_point, z_point = lorenz(x,y,z)
-        # Et on calcule l'état suivant pour X, Y, Z grâce à EULER
-        x = x + x_point * dt
-        y = y + y_point * dt
-        z = z + z_point * dt
+    x, y, z = x0, y0, z0
+    while True:
+        yield x, y, z
+        x_point, y_point, z_point = lorenz(x, y, z)
+        x += x_point * dt
+        y += y_point * dt
+        z += z_point * dt
 
-# -------------------
-# PROGRAMME PRINCIPAL
+# Programme principal
+pos = np.zeros((OBJETMAX, 3, NBPASMAX))
 
-pos=np.zeros((OBJETMAX,3,NBPASMAX))
-
-# GENERER LES DATAS (GRILLES DE POINTS POUR LES TRAJECTOIRES DE LORENZ)
-print ("L'ordinateur calcule "+str(OBJETMAX)+" trajectoires. Patientez svp...")
+# Générer les datas
+print(f"L'ordinateur calcule {OBJETMAX} trajectoires. Patientez svp...")
 objectNb = 0
-i = -1.0
-j = 0.0
-k = 2.0
-while i < 1.0 :
-    i = i+ EPSILON
-    while j < 2.0 :
-        j = j+ EPSILON
-        while k < 4.0 :
-            k = k+ EPSILON
-            pos_gen = iter(lorenz_gen(i,j,k,DT))
-            for l in range(0,NBPASMAX) :
-                pos[objectNb][0][l],pos[objectNb][1][l],pos[objectNb][2][l] = next(pos_gen)
-            objectNb = objectNb + 1
-           # print ("  ["+str(objectNb)+ " / "+str(OBJETMAX)+"]", end='\r')
+for i in np.arange(-1.0, 1.0, EPSILON):
+    if objectNb >= OBJETMAX:
+        break
+    for j in np.arange(0.0, 2.0, EPSILON):
+        if objectNb >= OBJETMAX:
+            break
+        for k in np.arange(2.0, 4.0, EPSILON):
+            if objectNb >= OBJETMAX:
+                break
+            pos_gen = iter(lorenz_gen(i, j, k, DT))
+            pos[objectNb] = np.array([next(pos_gen) for _ in range(NBPASMAX)]).T
+            objectNb += 1
 
-print("\nIl y a exactement " + str(objectNb)+ " trajectoires à calculer.")
+print(f"\nIl y a exactement {objectNb} trajectoires à calculer.")
 
-# FONCTION D'ANIMATION
+# Fonction d'animation
 def update(num):
     ax.clear()
     ax.set_axis_off()
@@ -86,32 +75,21 @@ def update(num):
     ax.set_ylim3d(-30, 30)
     ax.set_zlim3d(0, 50)
 
-    xs= []
-    ys= []
-    zs= []
-    colors= []
-    for i in range (0, objectNb) :
-        xs.append(pos[i][0][num])
-        ys.append(pos[i][1][num])
-        zs.append(pos[i][2][num])
-        colors.append(i)
+    xs, ys, zs = pos[:objectNb, :, num].transpose()
+    colors = np.arange(objectNb)
         
-    cmap = plt.cm.winter
-    ax.scatter(xs, ys, zs,alpha=0.5, s=1, c=cmap(colors))
-    ax.view_init(0,160)    #Vue fabuleuse pour projection 2D !
+    cmap = plt.cm.viridis
+    ax.scatter(xs, ys, zs, alpha=0.5, s=2, c=cmap(colors))
+    ax.view_init(0, 160)
 
-    #print ("  Avancement du calcul de l'animation : [" + str(num) + " /"+ str(NBPASMAX)+"] images", end="\r")
-  
-# On récupère les objets matplotlib
-fig = plt.figure(dpi=200)
+# Récupérer les objets matplotlib
+fig = plt.figure()
 ax = plt.axes(projection='3d')
 
 # On efface les axes
 ax.set_axis_off()
 
 # Création d'un objet Animation
-monanim = animation.FuncAnimation(fig, update, frames=NBPASMAX-1, interval=20, blit=False)
-
-monanim.save(r'AnimationNew.mp4')
-
-#plt.show()
+monanim = animation.FuncAnimation(fig, update, frames=NBPASMAX-1, interval=1000/30, blit=False)
+#monanim.save(r'AnimationNew.mp4')
+plt.show()
