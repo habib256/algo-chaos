@@ -58,7 +58,7 @@ for i in np.arange(-1.0, 1.0, EPSILON):
     for j in np.arange(-1.0, 1.0, EPSILON):
         if objectNb >= OBJETMAX:
             break
-        for k in np.arange(2.0, 4.0, EPSILON):
+        for k in np.arange(1.0, 3.0, EPSILON):
             if objectNb >= OBJETMAX:
                 break
             pos_gen = iter(lorenz_gen(i, j, k, DT))
