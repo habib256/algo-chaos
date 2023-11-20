@@ -55,7 +55,7 @@ objectNb = 0
 for i in np.arange(-1.0, 1.0, EPSILON):
     if objectNb >= OBJETMAX:
         break
-    for j in np.arange(0.0, 2.0, EPSILON):
+    for j in np.arange(-1.0, 1.0, EPSILON):
         if objectNb >= OBJETMAX:
             break
         for k in np.arange(2.0, 4.0, EPSILON):
@@ -78,7 +78,7 @@ def update(num):
     xs, ys, zs = pos[:objectNb, :, num].transpose()
     colors = np.arange(objectNb)
         
-    cmap = plt.cm.viridis_r
+    cmap = plt.cm.winter_r
     ax.scatter(xs, ys, zs, alpha=0.5, s=2, c=cmap(colors))
     ax.view_init(0, 160)
 
