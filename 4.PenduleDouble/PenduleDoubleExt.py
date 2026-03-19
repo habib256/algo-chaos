@@ -174,7 +174,7 @@ y2 = y1-l2*np.cos(q2)
 
 pot = m1*g*y1 + m2*g*y2
 
-kin = l1*l1*w1*w1 + 0.5*l2*l2*w2*w2+ l1*l2*w1*w2*np.cos(q1-q2)
+kin = 0.5*(m1+m2)*l1*l1*w1*w1 + 0.5*m2*l2*l2*w2*w2 + m2*l1*l2*w1*w2*np.cos(q1-q2)
 
 e_s = kin + pot
 

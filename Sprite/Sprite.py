@@ -20,3 +20,5 @@ ax.scatter(x, y)
 for x0, y0, path in zip(x, y,paths):
     ab = AnnotationBbox(getImage(path), (x0, y0), frameon=False)
     ax.add_artist(ab)
+
+plt.show()
