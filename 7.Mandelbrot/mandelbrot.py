@@ -23,6 +23,7 @@ screen = pygame.display.set_mode((width, height))
 font = pygame.font.Font('DejaVuSansMono.ttf', 20)
 
 running = True
+real_zoom = 1.0
 
 # Définition de la fonction pour calculer la fractale de Mandelbrot
 @jit(nopython=True)
@@ -59,7 +60,7 @@ def calculer_mandelbrot(Z, max_iter, num_processors, num_batches, batch_size, fo
             screen.blit(text, (width - text.get_width(), 0))  # Position en haut à droite
             pygame.display.flip()
 
-        mandelbrot_set = np.array(mandelbrot_set).reshape((width, width))
+        mandelbrot_set = np.array(mandelbrot_set).reshape((height, width))
 
     return mandelbrot_set
 

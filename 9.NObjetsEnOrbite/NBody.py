@@ -23,6 +23,8 @@ class Vec2:
         return Vec2(self.x + v.x, self.y + v.y)
 
     def __radd__(self, v):
+        if isinstance(v, (int, float)):
+            return Vec2(self.x + v, self.y + v)
         return Vec2(self.x + v.x, self.y + v.y)
 
     def __sub__(self, v):
@@ -143,10 +145,6 @@ for i in range(n):
 
 
 
-import numpy as np
-from scipy.integrate import odeint
-import matplotlib.pyplot as plt
-
 def vectorfield(var, t):
     '''
     integrate function
@@ -177,7 +175,6 @@ def vectorfield(var, t):
 
 
 from scipy.integrate import odeint
-
 
 # set the initial conditions
 var = []
@@ -216,14 +213,14 @@ for i in range(n):
 
 
 # Potential Energy
-Energy = 0 
+Energy = 0
 for i in range(0,n):
     for j in range(i+1,n):
-        Energy += (-1/(((par[i].sol_pos.x-par[j].sol_pos.x)**2 + (par[i].sol_pos.y-par[j].sol_pos.y)**2)**(1/2)))
+        Energy += -par[i].G * par[i].m * par[j].m / (((par[i].sol_pos.x-par[j].sol_pos.x)**2 + (par[i].sol_pos.y-par[j].sol_pos.y)**2)**(1/2))
 
 # Kinetic Energy
 for i in range(0,n):
-    Energy += 0.5*(par[i].sol_vel.x*par[i].sol_vel.x + par[i].sol_vel.y*par[i].sol_vel.y)
+    Energy += 0.5*par[i].m*(par[i].sol_vel.x*par[i].sol_vel.x + par[i].sol_vel.y*par[i].sol_vel.y)
 
 
 
