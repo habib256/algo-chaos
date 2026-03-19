@@ -35,7 +35,6 @@ def lorenz(x, y, z, s=10, r=28, b=2.667):
     z_point = x*y - b*z
     return x_point, y_point, z_point
 
-@numba.jit(nopython=True)
 def lorenz_gen(x0, y0, z0, dt):
     """Un générateur Python des états successifs de Lorenz"""
     x, y, z = x0, y0, z0
@@ -76,8 +75,8 @@ def update(num):
     ax.set_zlim3d(0, 50)
 
     xs, ys, zs = pos[:objectNb, :, num].transpose()
-    colors = np.arange(objectNb)
-        
+    colors = np.arange(objectNb) / max(objectNb - 1, 1)
+
     cmap = plt.cm.winter_r
     ax.scatter(xs, ys, zs, alpha=0.5, s=2, c=cmap(colors))
     ax.view_init(0, 160)

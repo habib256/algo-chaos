@@ -23,6 +23,7 @@ screen = pygame.display.set_mode((width, height))
 font = pygame.font.Font('DejaVuSansMono.ttf', 20)
 
 running = True
+real_zoom = 1.0
 
 # Définition de la fonction pour calculer la fractale de Mandelbrot
 @jit(nopython=True)

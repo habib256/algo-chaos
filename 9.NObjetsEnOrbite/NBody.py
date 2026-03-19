@@ -23,6 +23,8 @@ class Vec2:
         return Vec2(self.x + v.x, self.y + v.y)
 
     def __radd__(self, v):
+        if isinstance(v, (int, float)):
+            return Vec2(self.x + v, self.y + v)
         return Vec2(self.x + v.x, self.y + v.y)
 
     def __sub__(self, v):
@@ -143,10 +145,6 @@ for i in range(n):
 
 
 
-import numpy as np
-from scipy.integrate import odeint
-import matplotlib.pyplot as plt
-
 def vectorfield(var, t):
     '''
     integrate function
@@ -177,7 +175,6 @@ def vectorfield(var, t):
 
 
 from scipy.integrate import odeint
-
 
 # set the initial conditions
 var = []

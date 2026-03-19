@@ -27,4 +27,11 @@ for i in range(1, k*N+1):
     anew = f(x[i])
     v[i] = v[i-1] + 0.5*(aold + anew)*h
 
+t = np.linspace(0, k*2*np.pi, k*N+1)
+plt.plot(t, x, label='Leapfrog')
+plt.plot(t, np.sin(t), '--', label='Exact: sin(t)')
+plt.xlabel('t')
+plt.ylabel('x(t)')
+plt.legend()
+plt.title('Leapfrog integrator: x\'\' + x = 0')
 plt.show()

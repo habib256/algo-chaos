@@ -20,9 +20,8 @@ beta = omega0/4      # Coefficient d'amortissement
 # Définition de l'équation différentielle du pendule avec un terme de forçage
 def fun(t, x, gamma):  # Ajoutez gamma comme terme de forçage
     phi, phipoint = x[0], x[1]
-    v = phipoint
     a = -2*beta*phipoint - omega0**2*np.sin(phi) + gamma*omega0**2*np.cos(omega*t)
-    return v, a
+    return phipoint, a
 
 t_max = 80          
 N_pas = 1000        

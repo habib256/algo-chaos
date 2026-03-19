@@ -13,7 +13,7 @@ import matplotlib.animation as animation
 
 # Constants
 g = 9.8
-L = 3  # Changed from 1.0 to 9.0
+L = 3  # Longueur du pendule
 theta_0 = np.pi / 4
 b = 0.2  # Damping coefficient
 
@@ -37,10 +37,10 @@ fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 5))
 
 # Create phase space plot
 line2, = ax2.plot([], [], 'r-')
-ax2.set_xlim(0, 10)
-ax2.set_ylim(-4, 4)
-ax2.set_xlabel('Angle °')
-ax2.set_ylabel('Vitesse m/s')
+ax2.set_xlim(-4, 4)
+ax2.set_ylim(-6, 6)
+ax2.set_xlabel('Angle (rad)')
+ax2.set_ylabel('Vitesse angulaire (rad/s)')
 ax2.set_title('Espace des phases')  # Set title for the second plot
 
 # Create pendulum animation

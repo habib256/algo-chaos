@@ -62,12 +62,12 @@ pos=np.zeros((OBJETMAX,3,NBPASMAX))
 print ("L'ordinateur calcule "+str(OBJETMAX)+" trajectoires. Patientez svp...")
 objectNb = 0
 i = -1.0
-j = 0.0
-k = 2.0
 while i < 1.0 :
     i = i+ EPSILON
+    j = 0.0
     while j < 2.0 :
         j = j+ EPSILON
+        k = 2.0
         while k < 4.0 :
             k = k+ EPSILON
             pos_gen = iter(lorenz_gen(i,j,k,DT))

@@ -24,7 +24,6 @@ GAMMA = 1.0569
 
 def fun(t,x):
     phi,phipoint = x[0], x[1]
-    v = phipoint
     phipointpoint = -2*BETA*phipoint - OMEGA0**2*sin(phi) + GAMMA*OMEGA0**2*cos(OMEGA*t)
     return phipoint,phipointpoint
 
