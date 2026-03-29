@@ -1,3 +1,3 @@
 # algo-chaos
 
-Playing with Python, Chaos, matplotlib and numpy
+Playing with Python, Chaos, matplotlib and numpy for IREM
